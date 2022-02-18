@@ -81,7 +81,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Bubble&#39;s bubble">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/tags/linear-algebra/index.html">
 <meta property="og:site_name" content="Bubble&#39;s bubble">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Bubble">
@@ -115,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/"/>
+  <link rel="canonical" href="http://example.com/tags/linear-algebra/"/>
 
 
 
 
 
-  <title>Bubble's bubble</title>
+  <title>Tag: linear algebra | Bubble's bubble</title>
   
 
 
@@ -140,8 +140,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,151 +233,53 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
+
+  
+  
+  
+  <div class="post-block tag">
+
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>linear algebra<small>Tag</small>
+        </h1>
+      </div>
+
       
-
-  
-
-  
-  
-  
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/18/python%E7%A2%8E%E7%89%87-numpy-dot/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bubble">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/beer.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's bubble">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2022/02/18/python%E7%A2%8E%E7%89%87-numpy-dot/" itemprop="url">
+              
+                <span itemprop="name">python碎片-numpy.dot</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/02/18/python%E7%A2%8E%E7%89%87-numpy-dot/" itemprop="url">python碎片-numpy.dot</a></h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-18T15:34:22+08:00">
-                2022-02-18
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2022-02-18T15:34:22+08:00"
+              content="2022-02-18" >
+          02-18
+        </time>
+      </div>
 
-            
+    </header>
+  </article>
 
-            
-          </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="python碎片-numpy-dot"><a href="#python碎片-numpy-dot" class="headerlink" title="python碎片-numpy.dot"></a>python碎片-numpy.dot</h1><p>numpy.dot(x,y)是一个善变的函数<br>当x和y都是一维数组时，返回x和y的内积，返回值是一个数值<br>当x和y都是二维数组时，返回x和y的矩阵乘法结果，返回值是一个矩阵<br>当x是一维数组，y是二维数组时，我无法解释，总之看起来并没有什么意义<br>下面这段程序演示了上述现象<br>值得注意的是,a,b,c看起来很像，但分别是 <strong>长度为3的一维数组、3×1的二维数组、1×3的二维数组</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment">#a=np.random.randn(3)</span></span><br><span class="line"><span class="comment">#b=np.random.randn(3,1)</span></span><br><span class="line"><span class="comment">#c=np.random.randn(1,3)</span></span><br><span class="line">a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b=[[<span class="number">1</span>],[<span class="number">2</span>],[<span class="number">3</span>]]</span><br><span class="line">c=[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line">ans0=np.dot(a,a)</span><br><span class="line">ans1=np.dot(a,b)</span><br><span class="line">ans2=np.dot(c,b)</span><br><span class="line"><span class="built_in">print</span>(ans0,ans1,ans2) <span class="comment"># 14 [14] [[14]]</span></span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
-    
-    
-    
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
   
   
   
-  </article>
-
-
-    
-  </section>
 
   
 
