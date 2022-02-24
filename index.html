@@ -249,6 +249,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/24/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%87%E5%BF%98%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/02/24/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%87%E5%BF%98%E5%BD%95/" itemprop="url">命令行备忘录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-24T18:29:40+08:00">
+                2022-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tips/" itemprop="url" rel="index">
+                    <span itemprop="name">tips</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="从今天开始记录一些遇到的命令行，方便以后查"><a href="#从今天开始记录一些遇到的命令行，方便以后查" class="headerlink" title="从今天开始记录一些遇到的命令行，方便以后查"></a>从今天开始记录一些遇到的命令行，方便以后查</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a><strong>git</strong></h3><p>1.<code>git rm --cached filename</code><br>从本地缓存区移除filename这个文件<br><code>git rm --cached filename -f</code><br><strong>强制执行</strong>从本地缓存区移除filename这个文件<br>2.<code>git fetch</code><br>将远程仓库的内容拉取到本地，并且创建一个本地的分支叫origin&#x2F;master<br>3.<code>git merge branch</code><br>将branch的内容合并到当前分支，生成一个新的节点，有内容冲突会在文件中自动生成，可手动取舍<br>4.<code>git pull</code><br>pull&#x3D;fetch+merge<br>5.<code>git checkout branch</code><br>切换到branch分支，本地工作文件全部变为新的head指向的内容<br>6.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add --all</span><br><span class="line">git commit -m &quot;message&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<p>正常来说，将本地的更新上传到远程仓库用上面这一套命令就足够了<br>可以配置.gitignore的内容来屏蔽一些不想上传的文件</p>
+<h3 id="conda"><a href="#conda" class="headerlink" title="conda"></a><strong>conda</strong></h3><p>1.<code>conda info</code><br>查看conda整体信息<br>2.<code>conda info --env</code>&#x2F;<code>conda info -e</code><br>查看conda当前选择的虚拟环境</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/22/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E7%9A%84%E5%B0%8F%E6%84%9F%E6%82%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -344,6 +489,150 @@
           
             <h3 id="三次握手的小感悟"><a href="#三次握手的小感悟" class="headerlink" title="三次握手的小感悟"></a>三次握手的小感悟</h3><p>核心在于，任何连接都必须建立在双方知情的基础之上，否则就会产生无法释放的死连接。<br>例如第二次握手，如果client没有收到，那么就会尝试再次发送请求，<br>如果server不经过第三次握手就建立了连接，那么第一次尝试的请求就成了client不知情的请求。<br>一旦这个连接双方都知情，那么后续处理就不需要担忧了。</p>
 <p>如果出现错误，可以通过四次挥手来终止这次连接。<br>同样四次挥手需要确保双方知情。<br>A发出结束请求，<br>B表示同意，<br>那么A就可以大胆地停止传输，等待B结束<br>B发出结束请求<br>A表示同意，<br>结束</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/21/python-iter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/02/21/python-iter/" itemprop="url">python-iter</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-21T19:01:23+08:00">
+                2022-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="python-iter"><a href="#python-iter" class="headerlink" title="python-iter"></a>python-iter</h1><p>python可以为class定义迭代器方法</p>
+<h2 id="example-1"><a href="#example-1" class="headerlink" title="example-1"></a>example-1</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">counter</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.cnt=<span class="number">0</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__iter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">next</span>(<span class="params">self</span>):</span><br><span class="line">        self.cnt=self.cnt+<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> self.cnt</span><br><span class="line">it1=counter()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">5</span>):</span><br><span class="line">    <span class="built_in">print</span>(it1.<span class="built_in">next</span>())</span><br><span class="line">it2=counter()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">5</span>):</span><br><span class="line">    <span class="built_in">print</span>(it1.<span class="built_in">next</span>(),<span class="string">&#x27; &#x27;</span>,it2.<span class="built_in">next</span>())</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#输出</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span>   <span class="number">1</span></span><br><span class="line"><span class="number">6</span>   <span class="number">2</span></span><br><span class="line"><span class="number">7</span>   <span class="number">3</span></span><br><span class="line"><span class="number">8</span>   <span class="number">4</span></span><br></pre></td></tr></table></figure>
 
           
         
@@ -715,7 +1004,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -726,7 +1015,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -737,7 +1026,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
