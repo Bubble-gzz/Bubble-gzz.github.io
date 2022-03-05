@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="tips," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文仅代表作者目前的认知，如有错误欢迎指出     语言 C++ Python Go JavaScript    变量类型 静态 动态 静态 动态   编译&#x2F;解释型 编译型 解释型 编译型 解释型   行末分号 √ 不需要 不需要(甚至过于主动地自动添加) 不需要   层次表示方法 花括号 缩进 花括号 花括号   是否支持i++写法 √ × √ √   语法糖:多变量分别赋值 × √">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不同编程语言的对比(I)">
+<meta property="og:url" content="http://example.com/2022/03/05/%E4%B8%8D%E5%90%8C%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AF%B9%E6%AF%94/index.html">
+<meta property="og:site_name" content="Bubble&#39;s bubble">
+<meta property="og:description" content="本文仅代表作者目前的认知，如有错误欢迎指出     语言 C++ Python Go JavaScript    变量类型 静态 动态 静态 动态   编译&#x2F;解释型 编译型 解释型 编译型 解释型   行末分号 √ 不需要 不需要(甚至过于主动地自动添加) 不需要   层次表示方法 花括号 缩进 花括号 花括号   是否支持i++写法 √ × √ √   语法糖:多变量分别赋值 × √">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-05T07:51:16.000Z">
+<meta property="article:modified_time" content="2022-03-05T16:03:18.019Z">
+<meta property="article:author" content="Bubble">
+<meta property="article:tag" content="tips">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/03/05/不同编程语言的对比/"/>
+
+
+
+
+
+  <title>不同编程语言的对比(I) | Bubble's bubble</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bubble's bubble</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"><oOoOoOoOoOo</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/05/%E4%B8%8D%E5%90%8C%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AF%B9%E6%AF%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">不同编程语言的对比(I)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-05T15:51:16+08:00">
+                2022-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tips/" itemprop="url" rel="index">
+                    <span itemprop="name">tips</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <center><strong>本文仅代表作者目前的认知，如有错误欢迎指出</strong></center>
+
+<table>
+<thead>
+<tr>
+<th align="center">语言</th>
+<th align="center">C++</th>
+<th align="center">Python</th>
+<th align="center">Go</th>
+<th align="center">JavaScript</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">变量类型</td>
+<td align="center">静态</td>
+<td align="center">动态</td>
+<td align="center">静态</td>
+<td align="center">动态</td>
+</tr>
+<tr>
+<td align="center">编译&#x2F;解释型</td>
+<td align="center">编译型</td>
+<td align="center">解释型</td>
+<td align="center">编译型</td>
+<td align="center">解释型</td>
+</tr>
+<tr>
+<td align="center">行末分号</td>
+<td align="center">√</td>
+<td align="center">不需要</td>
+<td align="center">不需要(<a target="_blank" rel="noopener" href="https://blog.csdn.net/stpeace/article/details/81697347">甚至过于主动地自动添加</a>)</td>
+<td align="center">不需要</td>
+</tr>
+<tr>
+<td align="center">层次表示方法</td>
+<td align="center">花括号</td>
+<td align="center">缩进</td>
+<td align="center">花括号</td>
+<td align="center">花括号</td>
+</tr>
+<tr>
+<td align="center">是否支持i++写法</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">语法糖:多变量分别赋值</td>
+<td align="center">×</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://kracekumar.com/post/45502206532/python-parallel-assignment/">√ 平行赋值</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://www.jb51.net/article/145906.htm">√ 平行赋值</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/3986348/multiple-assignment-in-javascript-what-does-a-b-c-1-2-3-mean">√ 解构赋值</a></td>
+</tr>
+<tr>
+<td align="center">特殊的”等于”判定</td>
+<td align="center">-</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://blog.csdn.net/kobebryantlin0/article/details/73391584">is</a></td>
+<td align="center">-</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42420703/article/details/82531125">&#x3D;&#x3D;&#x3D;</a></td>
+</tr>
+</tbody></table>
+<h2 id="1-变量声明"><a href="#1-变量声明" class="headerlink" title="1.变量声明"></a>1.变量声明</h2><center><strong>C++</strong></center>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a=<span class="number">1</span>,b=<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<center><strong>Python</strong></center>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">1</span></span><br><span class="line">b=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<center><strong>Go</strong></center>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a,b=<span class="number">1</span>,<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a,b <span class="type">int</span></span><br><span class="line">a=<span class="number">1</span>; b=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a,b:=<span class="number">1</span>,<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<center><strong>JavaScript</strong></center>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="number">1</span>,b=<span class="number">2</span> <span class="comment">//普通的局部变量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="number">1</span>,b=<span class="number">2</span> <span class="comment">//和let差不多，但var型变量有独特的hoisting现象</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-条件语句"><a href="#2-条件语句" class="headerlink" title="2.条件语句"></a>2.条件语句</h2><center><strong>C++</strong></center>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition1) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (condition2) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<center><strong>Python</strong></center>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition1:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">if</span> condition2:</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition1:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">elif</span> condition2:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<center><strong>Go</strong></center>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition1 &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> condition2 &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+Golang还允许在if语句判定前执行一些东西：
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a:=b+c; a&lt;<span class="number">10</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<center><strong>JavaScript</strong></center>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition1) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (condition2) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3-循环语句"><a href="#3-循环语句" class="headerlink" title="3.循环语句"></a>3.循环语句</h2><center><strong>C++</strong></center>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;<span class="number">10</span>;i++) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (condition) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">while</span>(condition)</span><br></pre></td></tr></table></figure>
+<center><strong>Python</strong></center>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">while</span> condition:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<center><strong>Go</strong></center>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i:=<span class="number">1</span>;i&lt;<span class="number">10</span>;i++ &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> condition &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+无限循环:
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<center><strong>JavaScript</strong></center>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;<span class="number">10</span>;i++) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (condition) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">while</span>(condition)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-switch-x2F-case-语句"><a href="#4-switch-x2F-case-语句" class="headerlink" title="4.switch&#x2F;case 语句"></a>4.switch&#x2F;case 语句</h2><center><strong>C++</strong></center>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> ch=<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="keyword">switch</span> (ch) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;b&#x27;</span>:</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;c&#x27;</span>:</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>值得注意的是，这里的代码执行机制是<strong>跳转到匹配的case之后依次执行，直到遇到break为止</strong><br>因此如果不加break，就会继续执行到其它case后面的命令，可能会产生意想不到的bug<br>记得加break是个好习惯</p>
+</blockquote>
+<center><strong>Python</strong></center>
+
+<p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/switch-case-in-python-replacement/">这篇文章讲得很清楚,点这里</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#旧版本的python并没有直接提供switch语法</span></span><br><span class="line"><span class="comment">#以下为传统写法</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">numbers_to_strings</span>(<span class="params">argument</span>):</span><br><span class="line">    switcher = &#123;</span><br><span class="line">        <span class="number">0</span>: <span class="string">&quot;zero&quot;</span>,</span><br><span class="line">        <span class="number">1</span>: <span class="string">&quot;one&quot;</span>,</span><br><span class="line">        <span class="number">2</span>: <span class="string">&quot;two&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> switcher.get(argument, <span class="string">&quot;nothing&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    argument=<span class="number">0</span></span><br><span class="line">    <span class="built_in">print</span> (numbers_to_strings(argument))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &gt;=python 3.10</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">number_to_string</span>(<span class="params">agrument</span>):</span><br><span class="line">    match agrument:</span><br><span class="line">        case <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;zero&quot;</span></span><br><span class="line">        case <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;one&quot;</span></span><br><span class="line">        case <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;two&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ = <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    agrument = <span class="number">0</span></span><br><span class="line">    number_to_string(agrument)</span><br></pre></td></tr></table></figure>
+<center><strong>Go</strong></center>
+
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/go/go-switch-statement.html">Go的switch&#x2F;case语法比较先进，直接看这篇文章</a></p>
+<center><strong>JavaScript</strong></center>
+跟C++没区别
+
+<h2 id="5-函数"><a href="#5-函数" class="headerlink" title="5.函数"></a>5.函数</h2><center><strong>C++</strong></center>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">f</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> ret = a + b;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Default Parameters:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b,<span class="type">int</span> c=<span class="number">0</span>,<span class="type">int</span> d=<span class="number">0</span>)</span> <span class="comment">//有默认值的参数必须全都放在最后</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>,a,b,c,d);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">f</span>(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">//a=1, b=2, c=0, d=0</span></span><br><span class="line">    <span class="built_in">f</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment">//a=1, b=2, c=3, d=0</span></span><br><span class="line">    <span class="built_in">f</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">//a=1, b=2, c=3, d=4</span></span><br><span class="line"><span class="comment">//  f(1); 缺少参数</span></span><br><span class="line"><span class="comment">//  f(1,2,d=3,c=2) 没有这种keyword parameter的写法</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>C++语法糖:引用(reference)  注意区别于指针(pointer)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">int</span> &amp;a,<span class="type">int</span> &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line">    tmp=a; a=b; b=tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a=<span class="number">1</span>,b=<span class="number">2</span>;</span><br><span class="line">    <span class="built_in">swap</span>(a,b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a=%d b=%d&quot;</span>,a,b); <span class="comment">//a=2, b=1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>&amp;a,&amp;b就是传入参数a,b的本体，所以函数内部的一切操作都真实地作用在传入的外部变量身上<br>注意区别于指针，这里不需要写成*a,因为a不是地址，而是本体</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zj1131190425/article/details/92065897">C++函数指针</a>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">mul5</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*<span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mul3</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*<span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rep3</span><span class="params">(<span class="type">int</span> (*f)(<span class="type">int</span> x),<span class="type">int</span> &amp;num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">3</span>;i++)</span><br><span class="line">        num=(*f)(num);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">rep3</span>(mul5,num); <span class="comment">//令num自乘3次5</span></span><br><span class="line">    <span class="built_in">rep3</span>(mul3,num); <span class="comment">//令num自乘3次3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    和上面代码的区别仅仅是没有用指针</span></span><br><span class="line"><span class="comment">    这样写也可以</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mul5</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*<span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mul3</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*<span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rep3</span><span class="params">(<span class="type">int</span> f(<span class="type">int</span> x),<span class="type">int</span> &amp;num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">3</span>;i++)</span><br><span class="line">        num=<span class="built_in">f</span>(num);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">rep3</span>(mul5,num); <span class="comment">//令num自乘3次5</span></span><br><span class="line">    <span class="built_in">rep3</span>(mul3,num); <span class="comment">//令num自乘3次3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<center><strong>Python</strong></center>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">return</span> a+b</span><br></pre></td></tr></table></figure>
+Default Parameter:
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">a=<span class="number">0</span>,b=<span class="number">0</span>,c=<span class="number">0</span>,d=<span class="number">0</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;a=<span class="subst">&#123;a&#125;</span> b=<span class="subst">&#123;b&#125;</span> c=<span class="subst">&#123;c&#125;</span> d=<span class="subst">&#123;d&#125;</span>&quot;</span>)</span><br><span class="line">f(<span class="number">1</span>) <span class="comment"># a=1 b=0 c=0 d=0</span></span><br><span class="line">f(<span class="number">1</span>,<span class="number">2</span>) <span class="comment"># a=1 b=2 c=0 d=0</span></span><br><span class="line">f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) <span class="comment"># a=1 b=2 c=3 d=0</span></span><br><span class="line">f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>) <span class="comment"># a=1 b=2 c=3 d=4</span></span><br></pre></td></tr></table></figure>
+指名传参:
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">a=<span class="number">0</span>,b=<span class="number">0</span>,c=<span class="number">0</span>,d=<span class="number">0</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;a=<span class="subst">&#123;a&#125;</span> b=<span class="subst">&#123;b&#125;</span> c=<span class="subst">&#123;c&#125;</span> d=<span class="subst">&#123;d&#125;</span>&quot;</span>)</span><br><span class="line">f(<span class="number">1</span>,<span class="number">3</span>,d=<span class="number">5</span>,c=<span class="number">2</span>) <span class="comment">#a=1 b=3 c=2 d=5</span></span><br><span class="line"><span class="comment"># f(1,3,b=2) 不允许，因为按照传参顺序，b已经被传入3，不应当重复传参</span></span><br><span class="line"><span class="comment">#f(1,c=2,3) 不允许，因为指名部分必须在最后</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>小贴士:指名部分的排列并不讲究先后顺序，只要都在无名部分的右边就行</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.w3schools.com/python/python_functions.asp">Arbitrary Arguments</a>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">my_function</span>(<span class="params">*kids</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;The youngest child is &quot;</span> + kids[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">my_function(<span class="string">&quot;Emil&quot;</span>, <span class="string">&quot;Tobias&quot;</span>, <span class="string">&quot;Linus&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以元组(tuple)形式传入未知数量的参数，此部分同样必须位于参数列表的最后</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.w3schools.com/python/python_functions.asp">Arbitrary Keyword Arguments</a>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">my_function</span>(<span class="params">**kid</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;His last name is &quot;</span> + kid[<span class="string">&quot;lname&quot;</span>])</span><br><span class="line"></span><br><span class="line">my_function(fname = <span class="string">&quot;Tobias&quot;</span>, lname = <span class="string">&quot;Refsnes&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以字典(dictionary)形式传入未知数量的参数，此部分同样必须位于参数列表的最后</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/176924144">python函数也可作为对象，不再赘述</a></p>
+<center><strong>Go</strong></center>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f</span><span class="params">(a,b <span class="type">int</span>)</span></span> <span class="type">int</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>多个返回值:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法1</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swap</span><span class="params">(a,b <span class="type">int</span>)</span></span> (<span class="type">int</span>,<span class="type">int</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> b,a</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a,b:=<span class="number">1</span>,<span class="number">2</span></span><br><span class="line">    a,b=swap(a,b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法2</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swap</span><span class="params">(a,b <span class="type">int</span>)</span></span> (aa,bb <span class="type">int</span>) &#123;</span><br><span class="line">    aa,bb = b,a</span><br><span class="line">    <span class="keyword">return</span> aa,bb <span class="comment">//也可直接写return，因为aa和bb可以看作变量，里面有值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a,b:=<span class="number">1</span>,<span class="number">2</span></span><br><span class="line">    a,b=swap(a,b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Go貌似没有直接提供参数默认值的语法，但提供了<a target="_blank" rel="noopener" href="https://blog.csdn.net/jeffrey11223/article/details/79166724">不定数量的参数传入方式</a>:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test1</span><span class="params">(args ...<span class="type">string</span>)</span></span> &#123; <span class="comment">//可以接受任意个string参数</span></span><br><span class="line">    <span class="keyword">for</span> _, v:= <span class="keyword">range</span> args&#123;</span><br><span class="line">        fmt.Println(v)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">var</span> strss= []<span class="type">string</span>&#123;</span><br><span class="line">        <span class="string">&quot;qwr&quot;</span>,</span><br><span class="line">        <span class="string">&quot;234&quot;</span>,</span><br><span class="line">        <span class="string">&quot;yui&quot;</span>,</span><br><span class="line">        <span class="string">&quot;cvbc&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    test1(strss...) <span class="comment">//切片被打散传入</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数被当做变量使用:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> mulfunc <span class="function"><span class="keyword">func</span> <span class="params">(*<span class="type">int</span>)</span></span> <span class="comment">//定义一种新的type:mulfunc，mulfunc类型的变量可以存储后面这种形式的函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rep3</span><span class="params">(f mulfunc,x *<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">1</span>;i&lt;=<span class="number">3</span>;i++ &#123;</span><br><span class="line">        f(x)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    num:=<span class="number">2</span>;</span><br><span class="line">    mul3:=<span class="function"><span class="keyword">func</span><span class="params">(num *<span class="type">int</span>)</span></span>&#123;</span><br><span class="line">        (*num) *= <span class="number">3</span></span><br><span class="line">    &#125;</span><br><span class="line">    mul5:=<span class="function"><span class="keyword">func</span><span class="params">(num *<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">        (*num) *= <span class="number">5</span></span><br><span class="line">    &#125;</span><br><span class="line">    rep3(mul3,&amp;num) <span class="comment">//令num自乘3次3</span></span><br><span class="line">    rep3(mul5,&amp;num) <span class="comment">//令num自乘3次5</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;num = &quot;</span>,num); <span class="comment">// num = 6750</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<center><strong>JavaScript</strong></center>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params">a,b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a+b</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">f</span>(<span class="number">1</span>,<span class="number">2</span>)) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tips/" rel="tag"># tips</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/03/04/js-parameter%E5%92%8Cargument%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="next" title="js-parameter和argument的区别">
+                <i class="fa fa-chevron-left"></i> js-parameter和argument的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/beer.png"
+                alt="Bubble" />
+            
+              <p class="site-author-name" itemprop="name">Bubble</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Bubble-gzz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://bubble327670@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                My Friends
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leoleoasd.me/" title="Leo" target="_blank">Leo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.bearxiong.xyz/" title="Littlebear" target="_blank">Littlebear</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">1.变量声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">2.</span> <span class="nav-text">2.条件语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">3.循环语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-switch-x2F-case-%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.</span> <span class="nav-text">4.switch&#x2F;case 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">5.函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bubble</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
