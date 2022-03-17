@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="bubble," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="今天下午四点左右开始困扰到刚才七点半，此过程非常痛苦，痛苦到怀疑人生。因为我知道，数学不会出问题，如果出了问题，那一定是我自己的问题，我出了大问题。 起因下午的计组课，本以为是和平的一堂课，但听了一耳朵之后突然意识到有些不对劲。那就是补码的乘法运算。在我的世界观中，原码转补码就是取模，4位有符号整数的补码就是对16取模，32位有符号整数的补码就是对4,294,967,296取模。在我的世界观中，我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如果数学出了问题，那一定是我的问题">
+<meta property="og:url" content="http://example.com/2022/03/17/%E6%95%B0%E5%AD%A6%E5%A6%82%E6%9E%9C%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98%EF%BC%8C%E9%82%A3%E4%B8%80%E5%AE%9A%E6%98%AF%E6%88%91%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Bubble&#39;s bubble">
+<meta property="og:description" content="今天下午四点左右开始困扰到刚才七点半，此过程非常痛苦，痛苦到怀疑人生。因为我知道，数学不会出问题，如果出了问题，那一定是我自己的问题，我出了大问题。 起因下午的计组课，本以为是和平的一堂课，但听了一耳朵之后突然意识到有些不对劲。那就是补码的乘法运算。在我的世界观中，原码转补码就是取模，4位有符号整数的补码就是对16取模，32位有符号整数的补码就是对4,294,967,296取模。在我的世界观中，我">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-17T11:45:42.000Z">
+<meta property="article:modified_time" content="2022-03-17T13:19:41.682Z">
+<meta property="article:author" content="Bubble">
+<meta property="article:tag" content="bubble">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/03/17/数学如果出了问题，那一定是我的问题/"/>
+
+
+
+
+
+  <title>如果数学出了问题，那一定是我的问题 | Bubble's bubble</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bubble's bubble</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"><oOoOoOoOoOo</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/17/%E6%95%B0%E5%AD%A6%E5%A6%82%E6%9E%9C%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98%EF%BC%8C%E9%82%A3%E4%B8%80%E5%AE%9A%E6%98%AF%E6%88%91%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如果数学出了问题，那一定是我的问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-17T19:45:42+08:00">
+                2022-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bubble/" itemprop="url" rel="index">
+                    <span itemprop="name">bubble</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天下午四点左右开始困扰到刚才七点半，此过程非常痛苦，痛苦到怀疑人生。<br>因为我知道，数学不会出问题，如果出了问题，那一定是我自己的问题，我出了大问题。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>下午的计组课，本以为是和平的一堂课，但听了一耳朵之后突然意识到有些不对劲。<br>那就是补码的乘法运算。<br>在我的世界观中，原码转补码就是取模，<br>4位有符号整数的补码就是对<code>16</code>取模，32位有符号整数的补码就是对<code>4,294,967,296</code>取模。<br>在我的世界观中，我还知道一个关于取模的运算律:<code>(A*B)%M = (A%M)*(B%M) %M</code><br>所以很显然啊，<code>[A*B]补 = [A]补*[B]补 (自然溢出后)</code><br>因为比如在4位有符号整数中，<code>[X补] = X%16</code><br>所以有</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[A*B]补</span><br><span class="line">=(A*B)%16</span><br><span class="line">=(A%16)*(B%16)%16</span><br><span class="line">=[A]补*[B]补（自然溢出）</span><br></pre></td></tr></table></figure>
+
+<p>我也用程序进行了验证：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int a,b;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span><br><span class="line">    unsigned int _a = a, _b = b, _c, _d;</span><br><span class="line">    _c = _a * _b; //补码相乘</span><br><span class="line">    _d = a * b; //相乘后再转补码</span><br><span class="line">    printf(&quot;%u %u\n&quot;, _c, _d); //结果相同</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>可是如果是这么简单，为什么老师开始写满满一黑板啊？还有这个ppt是这么回事啊？怎么都在算！！！</strong><br>我开始意识到，哦，老师讲的例子都是定点小数……<br>定点小数可能和整数不太一样吧……<br>诶不对啊，定点小数不就是<strong>对2取模</strong>吗？本质上没啥区别吧？<br>整数可以的话，小数也可以吧？<br>但是从老师的讲述以及书本知识来看，<strong>小数没法直接补码相乘，至少负数和负数没法直接相乘</strong>。<br>我惊了。</p>
+<h2 id="数学天才"><a href="#数学天才" class="headerlink" title="数学天才"></a><del>数学天才</del></h2><p>书上写着，当<code>Y&lt;0</code>时，记<code>[Y]补=1.Y1Y2..Yn</code>，<br>有<code>[X*Y]补 = [X]补*0.Y1Y2..Yn + [-X]补</code><br>我想着，这么写虽然是对的，但是难道不能化简为<code>[X*Y]补 = [X]补*[Y]补</code>吗<br>于是我写出了下面这个<del>十分正确的</del>推算过程:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在模2的意义下:</span><br><span class="line">[X*Y]补</span><br><span class="line">=[X]补*0.Y1Y2..Yn + [-X]补    //书上的公式</span><br><span class="line">=[X]补*0.Y1Y2..Yn + (2-[X]补)</span><br><span class="line">=[X]补*0.Y1Y2..Yn - [X]补</span><br><span class="line">=[X]补*(0.Y1Y2..Yn - 1)</span><br><span class="line">=[X]补*(0.Y1Y2..Yn + 1)</span><br><span class="line">=[X]补*[Y]补                  //~~完全胜利~~</span><br></pre></td></tr></table></figure>
+<p>太好啦，这就说明书上的做法其实并不是唯一做法，事实上存在更简单的做法。<br>书上这么做，一定是为了方便后续的算法优化~~<br>带着胜利的心情我带入了一组样例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[X]补=1.001</span><br><span class="line">[Y]补=1.011</span><br><span class="line">[-X]补=0.111</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[X]补*[Y]补</span><br><span class="line">=1.001*1.011</span><br><span class="line">=1.001*(1+0.011)</span><br><span class="line">=1.001*0.011+1.001       //result_A</span><br><span class="line"></span><br><span class="line">[X]补*0.Y1Y2..Yn+[-X]补</span><br><span class="line">=1.001*0.011+0.111       //result_B</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>啊咧？？很显然在模2意义下<code>result_A</code>和<code>result_B</code>并不相等啊<br>可是刚才明明推出了<code>[X]补*0.Y1Y2..Yn+[-X]补 = [X]补*[Y]补</code><br>这是什么新型悖论？<br>我一直很清楚自己的运算基本功有多么糟糕，但我又花了十几分钟，得到的只是若干次的同样的结果。<br>我开始怀疑人生了。</p>
+<h2 id="察觉"><a href="#察觉" class="headerlink" title="察觉"></a>察觉</h2><p>我知道上面两个事实是矛盾的。这两个里面必定至少有一个是错的。<br>看着这本写满公式的教材，再看看实名认证的发明了<em>Booth算法</em>的Booth夫妇……<br>我知道，99.9999%的概率，我推出的那个等式是错的<br>这里面一定有什么地方是算错了。<br>我猜一定是<strong>取模</strong>。<br>经过一番挣扎，我突然发现了一个式子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 1.001*(0.011-1)%2</span><br><span class="line">=1.001*(0.011+1)%2</span><br></pre></td></tr></table></figure>
+<p>上面这个等式显然是错的，因为上下的值相差了<code>2*1.001 = 2.002</code>，它们在<code>模2</code>的意义下相差<code>0.002</code>，并不是同余关系<br>可是如果这么写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2*1.001 %2 = (2%2)*1.001 %2 = 0*1.001 %2 = 0</span><br></pre></td></tr></table></figure>
+<p><code>0 = 0.002</code>可不太对劲啊。<br>所以取模对小数不适用吗？？</p>
+<h2 id="重生"><a href="#重生" class="headerlink" title="重生"></a>重生</h2><p>我开始反思自己对取模的理解。<br>取模似乎是一种理所当然的东西，我都没有仔细想过它的合理性。<br>就好像苹果熟了就会掉到地上，而不会飞到天上一样。<br>来吧，<code>(A+B)%M = ( A%M + B%M )%M</code>，果真如此么？<br>果真如此。</p>
+<blockquote>
+<p>我可以想象有一个操场，一圈的长度为<code>M</code>。<br>那么<code>左边的式子</code>可以理解为<code>我从起点出发，一口气跑了(A+B)的路程，停留在哪个位置</code>。<br>而<code>右边的式子</code>可以理解为<code>我从起点出发，先跑了A的路程，然后原地休息片刻，继续跑了B的路程，最后停留在哪个位置</code>。<br>用脚指头想都知道，这两个是等价的，而且A和B可以是小数。</p>
+</blockquote>
+<p>那么接下来，<code>A*B %M = A*(B%M) %M</code>，果真如此么？</p>
+<blockquote>
+<p>左边的式子可以理解为我跑了A次，<code>每一次</code>都从上次结尾的位置出发，接着跑B的路程。<br>右边的式子可以理解为我跑了A次，<code>每一次</code>都从上次结尾的位置出发，接着跑B的路程，但是我发现B每包含完整的一圈，我就可以少跑这一圈，因为这是在做无用功。<br>也就是说在<code>每一次</code>结束的时候，<code>B</code>和<code>B%M</code>的实际效果是一样的，都会让我到达操场的同一个位置。</p>
+</blockquote>
+<p>所以当A是整数的时候，这个似乎没有任何问题。<br>但比较tricky的一点就是，<strong>当A是小数的时候，这个例子在概念上出现了根本性的区别。</strong><br>因为现在A可以取任意值，所以就没有<code>每一次</code>的概念。刚才我只会在跑完一次之后比较两种描述中我的位置是否相同，<br>可是当A可以取任意值的时候，这样的比较实际上成了一个连续的比较，也就是在每一个时间点的比较（假设规定两式中的<code>每一次</code>所耗费的时间长度相同）。<br>只要在某个时间点（对应某个A），在两种描述中我的位置不同，那就以为着存在一个A，使得这两个式子不相等。<br>这就好比体育课，<code>400m</code>的操场上有两个同学，同学甲用5分钟跑了2.5圈<code>B1=2.5*400</code>，同学乙用5分钟跑了0.5圈<code>B2=0.5*400</code>，他们跑的路程关于400是同余的<br>如果体育老师等他们出发之后就一直在终点玩手机，<strong>等他们都说跑完了再抬头看一眼</strong>，那么老师只知道这两个人都跑到同一个位置，却不知道他们跑的路程不同。<br>但如果老师<strong>一直盯着他俩看</strong>，在中途就可以发现两个人的位置并不相同，也就是A取任意数的时候，可以发现<code>A*B1%400 != A*B2%400</code>。</p>
+<p>回头看我推导的那个式子中的一步：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">模2意义下</span><br><span class="line"> [X]补*(0.Y1Y2..Yn - 1)</span><br><span class="line">=[X]补*(0.Y1Y2..Yn + 1)</span><br></pre></td></tr></table></figure>
+<p>这里[X]补并不是整数，因此这里不能用同余的性质。<br>破案了。</p>
+<p>所以小数的补码乘法确实不能简单地用补码相乘。<br>所以数学确实没有错。<br>所以再次发现自己是小丑。<br>但至少是一个安心的小丑啦~~~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bubble/" rel="tag"># bubble</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/03/17/post/" rel="next" title="post">
+                <i class="fa fa-chevron-left"></i> post
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/beer.png"
+                alt="Bubble" />
+            
+              <p class="site-author-name" itemprop="name">Bubble</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Bubble-gzz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://bubble327670@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                My Friends
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leoleoasd.me/" title="Leo" target="_blank">Leo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.bearxiong.xyz/" title="Littlebear" target="_blank">Littlebear</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%A4%A9%E6%89%8D"><span class="nav-number">2.</span> <span class="nav-text">数学天才</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%9F%E8%A7%89"><span class="nav-number">3.</span> <span class="nav-text">察觉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E7%94%9F"><span class="nav-number">4.</span> <span class="nav-text">重生</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bubble</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
