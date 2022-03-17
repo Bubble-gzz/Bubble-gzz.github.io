@@ -87,7 +87,7 @@
 <meta property="og:description" content="在机器中，整数的二进制数都是补码。而整数的乘2和除2（下取整，floor(7&#x2F;3)&#x3D;2, floor(-7&#x2F;3)&#x3D;-4 ）都是通过补码的位移来实现的。关于位移这一简单的小妙招为什么合理，正数可能没啥好说的，但关键是负数也成立，这就不得不说补码的设计还是很巧妙的，这就是又一个体现省时间直接跳到最后一部分 正数的左移和右移正数很容易理解，例如在8位的补码中：例如">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-17T01:34:10.000Z">
-<meta property="article:modified_time" content="2022-03-17T03:56:13.638Z">
+<meta property="article:modified_time" content="2022-03-17T04:31:07.753Z">
 <meta property="article:author" content="Bubble">
 <meta property="article:tag" content="bubble">
 <meta name="twitter:card" content="summary">
@@ -345,7 +345,7 @@
         <p>在机器中，整数的二进制数都是补码。而整数的乘2和除2（下取整，floor(7&#x2F;3)&#x3D;2, floor(-7&#x2F;3)&#x3D;-4 ）都是通过补码的位移来实现的。<br>关于位移这一简单的小妙招为什么合理，正数可能没啥好说的，但关键是负数也成立，这就不得不说补码的设计还是很巧妙的，这就是又一个体现<br><strong>省时间直接跳到最后一部分</strong></p>
 <h2 id="正数的左移和右移"><a href="#正数的左移和右移" class="headerlink" title="正数的左移和右移"></a>正数的左移和右移</h2><p>正数很容易理解，例如在8位的补码中：<br>例如<code>5×2=10</code>，要让<code>5</code>变成2倍，只需要将补码左移一位，尾巴上加<code>0</code>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00000101 // 5</span><br><span class="line">00001010 // 10</span><br></pre></td></tr></table></figure>
-<p>类似地，<code>13/2=6</code>，要让<code>7</code>整除2，只需要将补码右移一位，高位补<code>0</code>（扔掉原来的最低位）：</p>
+<p>类似地，<code>13/2=6</code>，要让<code>13</code>整除2，只需要将补码右移一位，高位补<code>0</code>（扔掉原来的最低位）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00001101 // 13</span><br><span class="line">00000110 // 6</span><br></pre></td></tr></table></figure>
 <p>要想理解上面的机制，首先需要理解<strong>位权</strong>的概念，也就是每一位都有一个权值，表示这一位的<code>1</code>所代表的真实值，假设从0开始依次给低位到高位标号，那么二进制中第<code>i</code>位的位权就为<code>2^i</code>。<br>例如<code>13</code>的二进制数<code>00001101</code>，在第<code>0,1,3</code>位分别有一个<code>1</code>，位权分别为<code>1,4,8</code>，因此这个二进制对应的真实值就是<code>1+4+8=13</code><br>有了位权的概念，就很容易理解左移右移的含义了。<strong>左移相当于所有位权都×2，自然整个数的数值×2，右移相当于所有位权&#x2F;2，自然整个数的数值&#x2F;2。</strong></p>
 <h2 id="负数的左移和右移"><a href="#负数的左移和右移" class="headerlink" title="负数的左移和右移"></a>负数的左移和右移</h2><h3 id="位权不管用了"><a href="#位权不管用了" class="headerlink" title="位权不管用了"></a>位权不管用了</h3><p>负数的左移右移似乎没那么好理解了。因为负数的补码没法用刚才的<strong>位权</strong>的概念。<br>例如-1的补码是<code>11111111</code>，你总不能还像正数那样按位权分解成 <code>-1=1+2+4+..+127</code>吧。<br>-1&#x2F;2&#x3D;?</p>
