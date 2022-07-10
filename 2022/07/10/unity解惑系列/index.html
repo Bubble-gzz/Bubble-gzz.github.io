@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="tips,unity," />
 
 
 
@@ -79,12 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bubble&#39;s bubble">
-<meta property="og:url" content="http://example.com/tags/linear-algebra/index.html">
+<meta name="description" content="gameObject.getComponent vs getComponent我一直以为gameObject.getComponent是类的一个静态方法。实际上是script类继承的monoBehavior里面的一个property叫gameObject，表示脚本依附的游戏对象。这样就很清晰了。前者是调用了gameObject的getComponent方法，而后者是调用了monoBehavior的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="unity解惑系列">
+<meta property="og:url" content="http://example.com/2022/07/10/unity%E8%A7%A3%E6%83%91%E7%B3%BB%E5%88%97/index.html">
 <meta property="og:site_name" content="Bubble&#39;s bubble">
+<meta property="og:description" content="gameObject.getComponent vs getComponent我一直以为gameObject.getComponent是类的一个静态方法。实际上是script类继承的monoBehavior里面的一个property叫gameObject，表示脚本依附的游戏对象。这样就很清晰了。前者是调用了gameObject的getComponent方法，而后者是调用了monoBehavior的">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-10T13:34:10.000Z">
+<meta property="article:modified_time" content="2022-07-10T13:38:18.414Z">
 <meta property="article:author" content="Bubble">
+<meta property="article:tag" content="tips">
+<meta property="article:tag" content="unity">
 <meta name="twitter:card" content="summary">
 
 
@@ -115,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/tags/linear-algebra/"/>
+  <link rel="canonical" href="http://example.com/2022/07/10/unity解惑系列/"/>
 
 
 
 
 
-  <title>Tag: linear algebra | Bubble's bubble</title>
+  <title>unity解惑系列 | Bubble's bubble</title>
   
 
 
@@ -140,7 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,54 +240,182 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>linear algebra<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/10/unity%E8%A7%A3%E6%83%91%E7%B3%BB%E5%88%97/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2022/02/18/python-numpy.dot()/" itemprop="url">
-              
-                <span itemprop="name">python-numpy.dot()</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">unity解惑系列</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-02-18T15:34:22+08:00"
-              content="2022-02-18" >
-          02-18
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-07-10T21:34:10+08:00">
+                2022-07-10
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/unity/" itemprop="url" rel="index">
+                    <span itemprop="name">unity</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/unity/tips/" itemprop="url" rel="index">
+                    <span itemprop="name">tips</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="gameObject-getComponent-vs-getComponent"><a href="#gameObject-getComponent-vs-getComponent" class="headerlink" title="gameObject.getComponent vs getComponent"></a>gameObject.getComponent vs getComponent</h2><p>我一直以为gameObject.getComponent是类的一个静态方法。<br>实际上是script类继承的monoBehavior里面的一个property叫gameObject，表示脚本依附的游戏对象。<br>这样就很清晰了。<br>前者是调用了gameObject的getComponent方法，而后者是调用了monoBehavior的getComponent的方法。<br>二者殊途同归。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tips/" rel="tag"># tips</a>
+          
+            <a href="/tags/unity/" rel="tag"># unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/07/10/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-transform/" rel="next" title="unity基础概念:transform">
+                <i class="fa fa-chevron-left"></i> unity基础概念:transform
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -289,6 +423,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -309,8 +447,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -408,6 +555,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gameObject-getComponent-vs-getComponent"><span class="nav-number">1.</span> <span class="nav-text">gameObject.getComponent vs getComponent</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -541,6 +704,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -598,26 +765,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
