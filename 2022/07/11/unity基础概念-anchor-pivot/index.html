@@ -90,8 +90,9 @@
 <meta property="og:image" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot.png">
 <meta property="og:image" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/anchor.png">
 <meta property="og:image" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/position.png">
+<meta property="og:image" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/position2.png">
 <meta property="article:published_time" content="2022-07-11T02:25:54.000Z">
-<meta property="article:modified_time" content="2022-07-11T02:54:01.408Z">
+<meta property="article:modified_time" content="2022-07-11T03:37:45.858Z">
 <meta property="article:author" content="Bubble">
 <meta property="article:tag" content="unity">
 <meta name="twitter:card" content="summary">
@@ -348,9 +349,9 @@
 
       
         <p>UI类的对象都有几个属性，position，anchor，pivot，这些分别是干什么的呢？</p>
-<h2 id="pivot"><a href="#pivot" class="headerlink" title="pivot"></a>pivot</h2><p>首先pivot比较容易理解。也就是旋转中心。图中的圆圈标出了pivot的位置。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot0.png" alt="tool handle position"><br><code>pivot(rx,ry)</code>意思是旋转中心位于边框的<code>(sizeX*rx,sizeY*ry)</code>处。<br><code>pivot(0.5,0.5)</code>，意思是旋转中心位于边框的正中心。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot.png" alt="tool handle position"><br>注意将tool handle position切换为pivot模式，否则代表pivot的圆圈无法拖动，也不会跟随数值而改变显示的位置。</p>
-<h2 id="anchor"><a href="#anchor" class="headerlink" title="anchor"></a>anchor</h2><p>anchor是锚点的意思，也就是基准线。minX,maxX,minY,maxY分别表示了左右下上四条基准线的位置（和pivot一样同样是比例值）<br>不管canvas如何缩放，anchor的四条基准线位置始终和canvas成固定比例。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/anchor.png" alt="tool handle position"></p>
-<h2 id="position"><a href="#position" class="headerlink" title="position"></a>position</h2><p>position描述的是UI的真实边框相对于基准线的偏移量。<br>例如top&#x3D;20，就代表UI上边界距离基准线20单位。<br>注意这里的距离都是以向内部为正方向。也就是说，正的偏移量代表朝内偏移，负的代表朝外偏移。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/position.png" alt="tool handle position"></p>
+<h2 id="pivot"><a href="#pivot" class="headerlink" title="pivot"></a>pivot</h2><p>首先pivot比较容易理解。也就是旋转中心。图中的圆圈标出了pivot的位置。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot0.png" alt="pivot"><br><code>pivot(rx,ry)</code>意思是旋转中心位于边框的<code>(sizeX*rx,sizeY*ry)</code>处。<br><code>pivot(0.5,0.5)</code>，意思是旋转中心位于边框的正中心。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot.png" alt="tool handle position"><br>注意将tool handle position切换为pivot模式，否则代表pivot的圆圈无法拖动，也不会跟随数值而改变显示的位置。</p>
+<h2 id="anchor"><a href="#anchor" class="headerlink" title="anchor"></a>anchor</h2><p>anchor是锚点的意思，也就是基准线。minX,maxX,minY,maxY分别表示了左右下上四条基准线的位置（和pivot一样同样是比例值）<br>不管canvas如何缩放，anchor的四条基准线位置始终和canvas成固定比例。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/anchor.png" alt="anchor"></p>
+<h2 id="position"><a href="#position" class="headerlink" title="position"></a>position</h2><p>position描述的是UI的真实边框相对于基准线的偏移量。<br>例如top&#x3D;20，就代表UI上边界距离基准线20单位。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/position.png" alt="position-1"><br>注意这里的距离都是以向内部为正方向。也就是说，正的偏移量代表朝内偏移，负的代表朝外偏移。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/position2.png" alt="position-2"><br>特殊情况：当anchor四个顶点有重合，即变成一个点或者一条线的时候，压扁的那个维度就不再用两个偏移量表示，而是用pos表示位置，宽度或者高度来表示两条边的位置。这个也大同小异。</p>
 
       
     </div>
