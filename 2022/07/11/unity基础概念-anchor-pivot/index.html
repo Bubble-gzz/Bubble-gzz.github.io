@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,linear algebra," />
+  <meta name="keywords" content="unity," />
 
 
 
@@ -79,19 +79,23 @@
 
 
 
-<meta name="description" content="python碎片-numpy.dotnumpy.dot(x,y)是一个善变的函数当x和y都是一维数组时，返回x和y的内积，返回值是一个数值当x和y都是二维数组时，返回x和y的矩阵乘法结果，返回值是一个矩阵当x是一维数组，y是二维数组时，我无法解释，总之看起来并没有什么意义下面这段程序演示了上述现象值得注意的是,a,b,c看起来很像，但分别是 长度为3的一维数组、3×1的二维数组、1×3的二维数组">
+<meta name="description" content="UI类的对象都有几个属性，position，anchor，pivot，这些分别是干什么的呢？ pivot首先pivot比较容易理解。也就是旋转中心。图中的圆圈标出了pivot的位置。pivot(rx,ry)意思是旋转中心位于边框的(sizeX*rx,sizeY*ry)处。pivot(0.5,0.5)，意思是旋转中心位于边框的正中心。注意将tool handle position切换为pivot模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python-numpy.dot()">
-<meta property="og:url" content="http://example.com/2022/02/18/python-numpy.dot()/index.html">
+<meta property="og:title" content="unity基础概念:anchor &amp; pivot">
+<meta property="og:url" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/index.html">
 <meta property="og:site_name" content="Bubble&#39;s bubble">
-<meta property="og:description" content="python碎片-numpy.dotnumpy.dot(x,y)是一个善变的函数当x和y都是一维数组时，返回x和y的内积，返回值是一个数值当x和y都是二维数组时，返回x和y的矩阵乘法结果，返回值是一个矩阵当x是一维数组，y是二维数组时，我无法解释，总之看起来并没有什么意义下面这段程序演示了上述现象值得注意的是,a,b,c看起来很像，但分别是 长度为3的一维数组、3×1的二维数组、1×3的二维数组">
+<meta property="og:description" content="UI类的对象都有几个属性，position，anchor，pivot，这些分别是干什么的呢？ pivot首先pivot比较容易理解。也就是旋转中心。图中的圆圈标出了pivot的位置。pivot(rx,ry)意思是旋转中心位于边框的(sizeX*rx,sizeY*ry)处。pivot(0.5,0.5)，意思是旋转中心位于边框的正中心。注意将tool handle position切换为pivot模式">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-18T07:34:22.000Z">
-<meta property="article:modified_time" content="2022-02-18T15:15:46.141Z">
+<meta property="og:image" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot0.png">
+<meta property="og:image" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot.png">
+<meta property="og:image" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/anchor.png">
+<meta property="og:image" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/position.png">
+<meta property="article:published_time" content="2022-07-11T02:25:54.000Z">
+<meta property="article:modified_time" content="2022-07-11T02:54:01.408Z">
 <meta property="article:author" content="Bubble">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="linear algebra">
+<meta property="article:tag" content="unity">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot0.png">
 
 
 
@@ -121,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/02/18/python-numpy.dot()/"/>
+  <link rel="canonical" href="http://example.com/2022/07/11/unity基础概念-anchor-pivot/"/>
 
 
 
 
 
-  <title>python-numpy.dot() | Bubble's bubble</title>
+  <title>unity基础概念:anchor & pivot | Bubble's bubble</title>
   
 
 
@@ -254,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/18/python-numpy.dot()/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bubble">
@@ -271,7 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python-numpy.dot()</h1>
+          <h1 class="post-title" itemprop="name headline">unity基础概念:anchor & pivot</h1>
         
 
         <div class="post-meta">
@@ -283,8 +287,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-18T15:34:22+08:00">
-                2022-02-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-07-11T10:25:54+08:00">
+                2022-07-11
               </time>
             
 
@@ -306,8 +310,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/unity/" itemprop="url" rel="index">
+                    <span itemprop="name">unity</span>
                   </a>
                 </span>
 
@@ -343,8 +347,11 @@
       
 
       
-        <h1 id="python碎片-numpy-dot"><a href="#python碎片-numpy-dot" class="headerlink" title="python碎片-numpy.dot"></a>python碎片-numpy.dot</h1><p>numpy.dot(x,y)是一个善变的函数<br>当x和y都是一维数组时，返回x和y的内积，返回值是一个数值<br>当x和y都是二维数组时，返回x和y的矩阵乘法结果，返回值是一个矩阵<br>当x是一维数组，y是二维数组时，我无法解释，总之看起来并没有什么意义<br>下面这段程序演示了上述现象<br>值得注意的是,a,b,c看起来很像，但分别是 <strong>长度为3的一维数组、3×1的二维数组、1×3的二维数组</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment">#a=np.random.randn(3)</span></span><br><span class="line"><span class="comment">#b=np.random.randn(3,1)</span></span><br><span class="line"><span class="comment">#c=np.random.randn(1,3)</span></span><br><span class="line">a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b=[[<span class="number">1</span>],[<span class="number">2</span>],[<span class="number">3</span>]]</span><br><span class="line">c=[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line">ans0=np.dot(a,a)</span><br><span class="line">ans1=np.dot(a,b)</span><br><span class="line">ans2=np.dot(c,b)</span><br><span class="line"><span class="built_in">print</span>(ans0,ans1,ans2) <span class="comment"># 14 [14] [[14]]</span></span><br></pre></td></tr></table></figure>
+        <p>UI类的对象都有几个属性，position，anchor，pivot，这些分别是干什么的呢？</p>
+<h2 id="pivot"><a href="#pivot" class="headerlink" title="pivot"></a>pivot</h2><p>首先pivot比较容易理解。也就是旋转中心。图中的圆圈标出了pivot的位置。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot0.png" alt="tool handle position"><br><code>pivot(rx,ry)</code>意思是旋转中心位于边框的<code>(sizeX*rx,sizeY*ry)</code>处。<br><code>pivot(0.5,0.5)</code>，意思是旋转中心位于边框的正中心。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/pivot.png" alt="tool handle position"><br>注意将tool handle position切换为pivot模式，否则代表pivot的圆圈无法拖动，也不会跟随数值而改变显示的位置。</p>
+<h2 id="anchor"><a href="#anchor" class="headerlink" title="anchor"></a>anchor</h2><p>anchor是锚点的意思，也就是基准线。minX,maxX,minY,maxY分别表示了左右下上四条基准线的位置（和pivot一样同样是比例值）<br>不管canvas如何缩放，anchor的四条基准线位置始终和canvas成固定比例。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/anchor.png" alt="tool handle position"></p>
+<h2 id="position"><a href="#position" class="headerlink" title="position"></a>position</h2><p>position描述的是UI的真实边框相对于基准线的偏移量。<br>例如top&#x3D;20，就代表UI上边界距离基准线20单位。<br>注意这里的距离都是以向内部为正方向。也就是说，正的偏移量代表朝内偏移，负的代表朝外偏移。<br><img src="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/position.png" alt="tool handle position"></p>
+
       
     </div>
     
@@ -361,9 +368,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
-          
-            <a href="/tags/linear-algebra/" rel="tag"># linear algebra</a>
+            <a href="/tags/unity/" rel="tag"># unity</a>
           
         </div>
       
@@ -376,15 +381,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2022/07/10/unity%E8%A7%A3%E6%83%91%E7%B3%BB%E5%88%97/" rel="next" title="unity解惑系列">
+                <i class="fa fa-chevron-left"></i> unity解惑系列
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/02/18/python-copy/" rel="prev" title="python-copy">
-                python-copy <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -554,7 +559,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python%E7%A2%8E%E7%89%87-numpy-dot"><span class="nav-number">1.</span> <span class="nav-text">python碎片-numpy.dot</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pivot"><span class="nav-number">1.</span> <span class="nav-text">pivot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#anchor"><span class="nav-number">2.</span> <span class="nav-text">anchor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#position"><span class="nav-number">3.</span> <span class="nav-text">position</span></a></li></ol></div>
             
 
           </div>
