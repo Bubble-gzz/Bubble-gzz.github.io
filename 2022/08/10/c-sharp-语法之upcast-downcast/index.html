@@ -87,7 +87,7 @@
 <meta property="og:description" content="C# 语法之upcast &amp; downcastUpcast想象一个应用场景，当我想要实现一个物品背包，每个物品槽都是一个Item类型，然而具体的物品都是Item的子类而非Item本身，例如我们有两个class，从Item衍生而出: 1234567891011121314class Item&amp;#123;    protected float price;&amp;#125;class Sword :">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-08-10T03:07:39.000Z">
-<meta property="article:modified_time" content="2022-08-10T03:50:14.631Z">
+<meta property="article:modified_time" content="2022-08-10T03:51:17.267Z">
 <meta property="article:author" content="Bubble">
 <meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
@@ -353,7 +353,12 @@
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sword sword2 = (Sword)item;</span><br></pre></td></tr></table></figure>
 <p>我们新建一个对象sword2，将item强制转化为Sword类型(注意这里必须说清楚你要转化的类型，否则编译也会失败，这也很好理解，因为程序不知道你要转化成什么，万一是Sword的子类呢？也是有可能的哦)，成功了！<br>那我们就好奇了，sword2现在是谁呢？是sword本体呢，还是一个复制品呢？它的atk值是多少呢？</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Sword sword = <span class="keyword">new</span> Sword();</span><br><span class="line">sword.atk = <span class="number">1</span>;</span><br><span class="line">Item item = sword;</span><br><span class="line">Sword sword2 = (Sword)item;</span><br><span class="line">sword.atk = <span class="number">5</span>;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;sword2.atk = &quot;</span> + sword2.atk); <span class="comment">// Output: sword2.atk = 5</span></span><br><span class="line">sword2.atk = <span class="number">10</span>;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;sword.atk = &quot;</span> + sword.atk); <span class="comment">// Output : sword.atk = 10</span></span><br></pre></td></tr></table></figure>
-<p>通过上面这个实验，真相已经很显然了，sword2就是sword，虽然经过了item这个中间容器，但sword还是无损地传到了sword2中。<br>综合上面的种种现象，我得出结论：<br><strong><code>upcast</code>将子类对象存放到父类对象时，并不是将子类对象进行简化，而是存放了一个子类本体引用，暂时对外隐藏了父类中不存在的内容。</strong><br>例如这个例子中，item还是指代sword，只不过暂时无法通过item来访问sword.atk。<br>不过我们对于<code>downcast</code>似乎还有不太了解的地方。可以将父类转化为子类？怎么听都很扯啊，毕竟子类有父类中不存在的内容，难道c#可以无中生有吗？<br>但上面的downcast之所以可以成功，一个重要因素在于sword2的类型和item中对象的类型是一致的，都是Sword。<br>我们来试试<code>downcast</code>到另一个不同的子类：</p>
+<p>通过上面这个实验，真相已经很显然了，sword2就是sword，虽然经过了item这个中间容器，但sword还是无损地传到了sword2中。<br>综合上面的种种现象，我得出结论：</p>
+<blockquote>
+<p><code>upcast</code>将子类对象存放到父类对象时，并不是将子类对象进行简化，而是存放了一个子类本体引用，暂时对外隐藏了父类中不存在的内容。</p>
+</blockquote>
+<p>例如这个例子中，item还是指代sword，只不过暂时无法通过item来访问sword.atk。</p>
+<p>不过我们对于<code>downcast</code>似乎还有不太了解的地方。可以将父类转化为子类？怎么听都很扯啊，毕竟子类有父类中不存在的内容，难道c#可以无中生有吗？<br>但上面的downcast之所以可以成功，一个重要因素在于sword2的类型和item中对象的类型是一致的，都是Sword。<br>我们来试试<code>downcast</code>到另一个不同的子类：</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sword sword = <span class="keyword">new</span> Sword();</span><br><span class="line">sword.atk = <span class="number">1</span>;</span><br><span class="line">Item item = sword;</span><br><span class="line">Shield shield = (Shield) item; <span class="comment">// System.InvalidCastException!!</span></span><br></pre></td></tr></table></figure>
 <p>结果出现了异常。这说明<code>downcast</code>也不是什么魔法。如果父类中存放的对象类型和<code>downcast</code>目标类型不兼容，也是会有问题的。<br>而这种问题编译时是无法发现的，只有运行时才会检验出来咯。</p>
 <p>知道了这些，我们就可以放心地使用<code>upcast</code>和<code>downcast</code>来写背包功能啦！当然再比如可插拔式的敌人AI（就像芯片那样）也可以用同样的方法！</p>
@@ -396,6 +401,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/09/13/Constructor/" rel="prev" title="Constructor">
+                Constructor <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -476,7 +485,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -487,7 +496,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -498,7 +507,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -585,7 +594,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

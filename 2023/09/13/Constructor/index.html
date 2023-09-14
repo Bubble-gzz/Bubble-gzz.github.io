@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Object-Oriented Programming,C#,C++,Java,Kotlin," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="记录一下关于类的构造函数以及初始化相关的东西。有两大问题，其中一个是隐式默认函数，另一个是构造函数的继承。隐式默认函数是指在用户没有显式定义构造函数的时候编译器自动隐式定义的默认构造函数，由于这是默认添加的，如果没有搞清楚背后的行为很容易造成初始化遗漏的问题。另一个问题是构造函数的继承，当一个子类继承自父类时，继承了属性和方法，但是继承函数呢？继承函数又可能很多，分为默认的和非默认的，这个时候继承">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Constructor">
+<meta property="og:url" content="http://example.com/2023/09/13/Constructor/index.html">
+<meta property="og:site_name" content="Bubble&#39;s bubble">
+<meta property="og:description" content="记录一下关于类的构造函数以及初始化相关的东西。有两大问题，其中一个是隐式默认函数，另一个是构造函数的继承。隐式默认函数是指在用户没有显式定义构造函数的时候编译器自动隐式定义的默认构造函数，由于这是默认添加的，如果没有搞清楚背后的行为很容易造成初始化遗漏的问题。另一个问题是构造函数的继承，当一个子类继承自父类时，继承了属性和方法，但是继承函数呢？继承函数又可能很多，分为默认的和非默认的，这个时候继承">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-13T10:52:08.000Z">
+<meta property="article:modified_time" content="2023-09-14T04:38:50.000Z">
+<meta property="article:author" content="Bubble">
+<meta property="article:tag" content="Object-Oriented Programming">
+<meta property="article:tag" content="C#">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Kotlin">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2023/09/13/Constructor/"/>
+
+
+
+
+
+  <title>Constructor | Bubble's bubble</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bubble's bubble</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"><oOoOoOoOoOo</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/13/Constructor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Constructor</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-09-13T18:52:08+08:00">
+                2023-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Object-Oriented-Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Object-Oriented Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>记录一下关于类的构造函数以及初始化相关的东西。<br>有两大问题，其中一个是隐式默认函数，另一个是构造函数的继承。<br>隐式默认函数是指在用户没有显式定义构造函数的时候编译器自动隐式定义的默认构造函数，由于这是默认添加的，<br>如果没有搞清楚背后的行为很容易造成初始化遗漏的问题。<br>另一个问题是构造函数的继承，当一个子类继承自父类时，继承了属性和方法，但是继承函数呢？继承函数又可能很多，分为默认的和非默认的，<br>这个时候继承的内容似乎又变得更加混乱了。<br>目前似乎没有语言是默认子类继承父类的构造函数的，而是需要显式地定义子类的构造函数或是从父类继承。<br>鉴于这两个问题的复杂和琐碎，各个语言的处理方式不尽相同，所以作一个整理记录。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>首先有一个各类语言都差不多的逻辑，那就是属性直接赋值是先于构造函数发生的，以java为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">    Arr()&#123;a=<span class="number">2</span>;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终a的值会变成2。</p>
+<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><h3 id="花括号初始化"><a href="#花括号初始化" class="headerlink" title="花括号初始化"></a>花括号初始化</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A = arr&#123;&#125;;              <span class="comment">// ok</span></span><br><span class="line">    arr B = arr&#123;<span class="number">1</span>&#125;;             <span class="comment">// ok</span></span><br><span class="line">    arr C = arr&#123;<span class="number">1</span>, <span class="string">&quot;hello&quot;</span>&#125;;    <span class="comment">// ok</span></span><br><span class="line">    arr D = arr&#123;<span class="string">&quot;hello&quot;</span>, <span class="number">1</span>&#125;;    <span class="comment">// compile error</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>当没有定义constructor时，用花括号的内容可以对号入座地进行初始化。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>(<span class="type">int</span> _a, string _b):a&#123;_a&#125;,b&#123;_b&#125;&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A = arr&#123;&#125;;              <span class="comment">// compile error</span></span><br><span class="line">    arr B = arr&#123;<span class="number">1</span>&#125;;             <span class="comment">// compile error</span></span><br><span class="line">    arr C = arr&#123;<span class="number">1</span>, <span class="string">&quot;hello&quot;</span>&#125;;    <span class="comment">// ok</span></span><br><span class="line">    arr D = arr&#123;<span class="string">&quot;hello&quot;</span>, <span class="number">1</span>&#125;;    <span class="comment">// compile error</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当定义了constructor时，不再执行默认的对号入座初始化，而是调用对应参数格式的constructor<br>没有参数时也是同样的道理：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>()&#123; a = <span class="number">5</span>; b = <span class="string">&quot;hello&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A = arr&#123;&#125;;</span><br><span class="line">    cout &lt;&lt; A.a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; A.b; <span class="comment">//5 hello</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意花括号初始化隐藏了一个默认值的规则，也就是当填写的参数少于实际需要的参数时，后面的参数默认为0或是其它对应的默认初始值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a,b,c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A&#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.b&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.c&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;endl; <span class="comment">// 1 2 0</span></span><br><span class="line">    <span class="type">int</span> list[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) cout&lt;&lt;list[i]&lt;&lt;<span class="string">&quot; &quot;</span>; <span class="comment">// 1 2 0 0 0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="初始化以及创建临时实例"><a href="#初始化以及创建临时实例" class="headerlink" title="初始化以及创建临时实例"></a>初始化以及创建临时实例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>(<span class="type">int</span> _a, string _b): a&#123;_a&#125;, <span class="built_in">b</span>(_b) &#123; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(arr A)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; A.a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; A.b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A = &#123;<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>&#125;;</span><br><span class="line">    arr B&#123;<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>&#125;;</span><br><span class="line">    arr C = <span class="built_in">arr</span>(<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="built_in">foo</span>(A);</span><br><span class="line">    <span class="built_in">foo</span>(B);</span><br><span class="line">    <span class="built_in">foo</span>(C);</span><br><span class="line">    <span class="built_in">foo</span>(<span class="built_in">arr</span>(<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>));</span><br><span class="line">    <span class="built_in">foo</span>(arr&#123;<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">5 hello</span></span><br><span class="line"><span class="comment">5 hello</span></span><br><span class="line"><span class="comment">5 hello</span></span><br><span class="line"><span class="comment">5 hello</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>可以看到不同的创建临时实例的方式，实际上都是调用了对应参数的constructor。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a,b,c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(arr A)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.b&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.c&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">foo</span>(&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;);</span><br><span class="line">    <span class="built_in">foo</span>(arr&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>给没有显式构造函数的类型传递参数时，对号入座法也适用。</p>
+<h3 id="default-constructor"><a href="#default-constructor" class="headerlink" title="default constructor"></a>default constructor</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;endl;</span><br><span class="line">    arr B&#123;&#125;;</span><br><span class="line">    cout&lt;&lt;B.a&lt;&lt;endl;</span><br><span class="line">    arr C = <span class="built_in">arr</span>();</span><br><span class="line">    cout&lt;&lt;C.a&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">112197632</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;endl;</span><br><span class="line">    arr B = <span class="built_in">arr</span>();</span><br><span class="line">    cout&lt;&lt;B.a&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">-38797312</span></span><br><span class="line"><span class="comment">-421528752</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>可以看到不显式地进行初始化导致初始值不干净的问题。查阅资料可知，当没有显式定义constructor的时候，<br>编译器会隐式地定义一个默认的constructor，但这个constructor到底会不会贴心地给属性初始化为默认值，我不好说。<br>所以有两种方法可以确保属性被正确地初始化为默认值：<br>（1）不定义任何constructor，然后用空{}的形式进行对号入座式的初始化<br>（2）显式定义一个不带参数的default constructor，然后在里面手动初始化，实例化的时候可以采用下面几种写法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr A; <span class="comment">//默认调用default constructor</span></span><br><span class="line">arr A=<span class="built_in">arr</span>(); <span class="comment">//显式调用default constructor</span></span><br><span class="line">arr A&#123;&#125;; <span class="comment">//显式调用default constructor</span></span><br><span class="line">arr A = &#123;&#125;; <span class="comment">//显式调用default constructor</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>(<span class="type">int</span> _a, string _b):a&#123;_a&#125;,b&#123;_b&#125;&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">arr <span class="title">A</span><span class="params">(<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>)</span></span>;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.b&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以使用<code>arr A(5, &quot;hello&quot;)</code>代替<code>arr A = arr(5, &quot;hello&quot;)</code>。但是看下面这种情况</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">arr <span class="title">A</span><span class="params">()</span></span>;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.b&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>却会编译错误，提示A是一个函数。这里是声明了一个没有参数的，返回值为arr的函数A。这也被称为”the most vexing parse”之一。</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>下面是最头疼的继承。c++的继承还没有研究，先不说。</p>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><h3 id="默认构造函数"><a href="#默认构造函数" class="headerlink" title="默认构造函数"></a>默认构造函数</h3><p>Java如果没有显示定义构造函数，那么会有一个空的默认构造函数。如果用户定义了至少一个构造函数，那么编译器就不会再自动定义空的默认构造函数，这时如果<br>用户希望使用 new A()这种无参数的构造函数，就需要自己手动定义。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">    Arr()&#123;&#125; <span class="comment">//必须要！ 如果去掉，那么*处就会报错，找不到对应格式的构造函数</span></span><br><span class="line">    Arr(<span class="type">int</span> _a, <span class="type">int</span> _b)&#123;</span><br><span class="line">        a=_a; b= _b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">        <span class="type">Arr</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Arr</span>(); <span class="comment">// * </span></span><br><span class="line">        System.out.println(temp.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="构造函数的继承"><a href="#构造函数的继承" class="headerlink" title="构造函数的继承"></a>构造函数的继承</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a, b;</span><br><span class="line">    Arr()&#123;a=<span class="number">5</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Brr</span> <span class="keyword">extends</span> <span class="title class_">Arr</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">        <span class="type">Arr</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Arr</span>();</span><br><span class="line">        <span class="type">Brr</span> <span class="variable">temp2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Brr</span>();</span><br><span class="line">        System.out.println(temp.a + <span class="string">&quot; &quot;</span> + temp2.a); <span class="comment">//5 5</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，Brr默认继承了Arr的构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a, b;</span><br><span class="line">    Arr(<span class="type">int</span> _a)&#123;a=_a;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Brr</span> <span class="keyword">extends</span> <span class="title class_">Arr</span> &#123; <span class="comment">//error:There is no default constructor in Arr</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到这个时候编译器报错。<br>子类必须显式地在构造函数中调用父类的某个构造函数super(…)，如果没有，那么会默认调用父类的default constructor。<br>第一个例子之所以没有报错是因为父类有default constructor。</p>
+<p>其中设计者的逻辑可能是，子类的初始化至少应该符合父类的某种初始化形式，而不是完全脱离父类的初始化?<br>既然子类可以override父类的方法，为什么不能override父类的构造函数呢？<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14250486/why-exactly-do-subclass-constructors-have-to-explicitly-call-super-class-constru#:~:text=This%20is%20required%20because%20the,parameters%20need%20to%20be%20passed">这个链接说的不错</a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Java中，构造函数不会默认继承，子类在继承父类的时候，每一个构造函数都应当显式地在开头调用父类的某个构造函数。</p>
+<h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><h3 id="Instantiation"><a href="#Instantiation" class="headerlink" title="Instantiation"></a>Instantiation</h3><p>Kotlin不用new关键字，直接调用构造函数：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> bob = Student(<span class="number">1</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor</h3><p>Kotlin的构造函数比较独特，一个类可以拥有一个primary constructor和若干个secondary constructor，<br>primary constructor用于声明属性和完成必备的初始化，secondary constructor用于额外的初始化，<br>secondary constructor必须显式地调用primary constructor。</p>
+<h4 id="Primary-Constructor"><a href="#Primary-Constructor" class="headerlink" title="Primary Constructor"></a>Primary Constructor</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>(<span class="keyword">val</span> age:<span class="built_in">Int</span>, <span class="keyword">var</span> grade:<span class="built_in">Int</span>, param:<span class="built_in">Int</span>) <span class="comment">//manner A</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> age:<span class="built_in">Int</span>, <span class="keyword">var</span> grade:<span class="built_in">Int</span>, param:<span class="built_in">Int</span>) <span class="comment">//manner B</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> age:<span class="built_in">Int</span>, <span class="keyword">var</span> grade:<span class="built_in">Int</span>, param:<span class="built_in">Int</span>)&#123;&#125; <span class="comment">//manner C</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在主体部分没有代码的情况下，可以省略花括号，写法C简化成写法B，<br>在没有额外的修饰词的情况下，写法B又可以简写成写法A。<br>出现在参数列表中以val或者var修饰的参数都会默认成为property，否则只是一个用于初始化的临时参数。<br>primary constructor的初始化代码被放在Initializer Block中。<br>代码按照从上到下的顺序依次执行遇到的property initializer和initializer block。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InitOrderDemo</span></span>(name: String) &#123;</span><br><span class="line">    <span class="keyword">val</span> firstProperty = <span class="string">&quot;First property: <span class="variable">$name</span>&quot;</span>.also(::println)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;First initializer block that prints <span class="variable">$name</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">val</span> secondProperty = <span class="string">&quot;Second property: <span class="subst">$&#123;name.length&#125;</span>&quot;</span>.also(::println)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Second initializer block that prints <span class="subst">$&#123;name.length&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">First property: hello</span></span><br><span class="line"><span class="comment">First initializer block that prints hello</span></span><br><span class="line"><span class="comment">Second property: 5</span></span><br><span class="line"><span class="comment">Second initializer block that prints 5</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>可以啥也不写，会有一个默认的空的构造函数:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dumb</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value:<span class="built_in">Int</span> = <span class="number">5</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> dumb = Dumb()</span><br><span class="line">    println(<span class="string">&quot;dumb.value: <span class="subst">$&#123;dumb.value&#125;</span>&quot;</span>) <span class="comment">// dumb.value: 5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Secondary-Constructor"><a href="#Secondary-Constructor" class="headerlink" title="Secondary Constructor"></a>Secondary Constructor</h4><p>二级构造函数的执行发生在主构造函数部分（包括initializer block和property initializer）之后。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Constructors</span> </span>&#123;</span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Init block A&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">constructor</span>(i: <span class="built_in">Int</span>) &#123;</span><br><span class="line">        println(<span class="string">&quot;Constructor <span class="variable">$value</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> value:<span class="built_in">Int</span> = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Init block B&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">Init block A</span></span><br><span class="line"><span class="comment">Init block B</span></span><br><span class="line"><span class="comment">Constructor 4</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>二级构造函数必须直接或间接调用一级构造函数（如果有的话）。<br>二级构造函数的参数不允许使用val或者var修饰，只用于传参目的。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>(<span class="keyword">var</span> age:<span class="built_in">Int</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> grade:<span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> height:<span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">init</span> &#123; println(<span class="string">&quot;constructor A    age: <span class="variable">$age</span>&quot;</span>) &#125;</span><br><span class="line">    <span class="keyword">constructor</span>(age:<span class="built_in">Int</span>, grade:<span class="built_in">Int</span>):<span class="keyword">this</span>(age)</span><br><span class="line">    &#123;</span><br><span class="line">        println(<span class="string">&quot;constructor B1&quot;</span>)</span><br><span class="line">        <span class="keyword">this</span>.grade = grade;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">constructor</span>(age:<span class="built_in">Int</span>, grade:<span class="built_in">Int</span>, height:<span class="built_in">Int</span>):<span class="keyword">this</span>(age, grade)</span><br><span class="line">    &#123;</span><br><span class="line">        println(<span class="string">&quot;constructor B2&quot;</span>)</span><br><span class="line">        <span class="keyword">this</span>.height = height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> bob = Student(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">constructor A    age: 1</span></span><br><span class="line"><span class="comment">constructor B1</span></span><br><span class="line"><span class="comment">constructor B2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>没有定义主构造函数，那么二级构造函数就可以没有交集了。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dumb</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value:<span class="built_in">Int</span> = <span class="number">5</span></span><br><span class="line">    <span class="keyword">var</span> name:String = <span class="string">&quot;someone&quot;</span></span><br><span class="line">    <span class="keyword">constructor</span>(value:<span class="built_in">Int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">constructor</span>(name:String)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> dumb1 = Dumb(<span class="number">132</span>)</span><br><span class="line">    <span class="keyword">val</span> dumb2 = Dumb(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    println(<span class="string">&quot;dumb1.value: <span class="subst">$&#123;dumb1.value&#125;</span> dumb1.name: <span class="subst">$&#123;dumb1.name&#125;</span>&quot;</span>)</span><br><span class="line">    println(<span class="string">&quot;dumb2.value: <span class="subst">$&#123;dumb2.value&#125;</span> dumb2.name: <span class="subst">$&#123;dumb2.name&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">dumb1.value: 132 dumb1.name: someone</span></span><br><span class="line"><span class="comment">dumb2.value: 5 dumb2.name: hello</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Constructor继承"><a href="#Constructor继承" class="headerlink" title="Constructor继承"></a>Constructor继承</h4><p>不管是直接还是间接，每一个构造函数都必须调用基类的某一个构造函数。<br>其中主构造函数调用时使用基类的名称，而二级构造函数调用时使用关键字super。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Base</span></span>(p: <span class="built_in">Int</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span></span>(p: <span class="built_in">Int</span>) : Base(p)</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyView</span> : <span class="type">View &#123;</span></span></span><br><span class="line">    <span class="keyword">constructor</span>(ctx: Context) : <span class="keyword">super</span>(ctx)</span><br><span class="line">    <span class="keyword">constructor</span>(ctx: Context, attrs: AttributeSet) : <span class="keyword">super</span>(ctx, attrs)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在继承的时候，子类在保证调用基类构造函数的基础上，同样可以定义自己的property，两者并不冲突。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Dumb</span></span>(<span class="keyword">var</span> value:<span class="built_in">Int</span> = <span class="number">5</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> name:String = <span class="string">&quot;someone&quot;</span></span><br><span class="line">    <span class="keyword">constructor</span>(value:<span class="built_in">Int</span>, name:String):<span class="keyword">this</span>(value)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BigDumb</span></span>(value:<span class="built_in">Int</span>, <span class="keyword">var</span> weight:<span class="built_in">Int</span> = <span class="number">100</span>):Dumb(value)&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> bob = Student(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">val</span> dumb = BigDumb(<span class="number">5</span>)</span><br><span class="line">    println(<span class="string">&quot;dumb.value: <span class="subst">$&#123;dumb.value&#125;</span>  dumb.name: <span class="subst">$&#123;dumb.weight&#125;</span>&quot;</span>) <span class="comment">//dumb.value: 5  dumb.weight: 100</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>kotlin比较有意思的一点是使用了两级构造函数，其中主构造函数颇有一种将类变成函数的意味，主构造函数的参数位于整个类的最顶部，<br>是类的DNA，是类最核心的参数，这样可以确保类最关键的参数被传进来，这种设计更加科学合理，可以减少bug。</p>
+<p>参考内容: <a target="_blank" rel="noopener" href="https://kotlinlang.org/docs">kotlinlang.org&#x2F;docs</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Object-Oriented-Programming/" rel="tag"># Object-Oriented Programming</a>
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/08/10/c-sharp-%E8%AF%AD%E6%B3%95%E4%B9%8Bupcast-downcast/" rel="next" title="C# 语法之upcast & downcast">
+                <i class="fa fa-chevron-left"></i> C# 语法之upcast & downcast
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/beer.png"
+                alt="Bubble" />
+            
+              <p class="site-author-name" itemprop="name">Bubble</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Bubble-gzz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://bubble327670@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                My Friends
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leoleoasd.me/" title="Leo" target="_blank">Leo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.bearxiong.xyz/" title="Littlebear" target="_blank">Littlebear</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C"><span class="nav-number"></span> <span class="nav-text">C++</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%B1%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">花括号初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%A5%E5%8F%8A%E5%88%9B%E5%BB%BA%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">初始化以及创建临时实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#default-constructor"><span class="nav-number">3.</span> <span class="nav-text">default constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">4.</span> <span class="nav-text">继承</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number"></span> <span class="nav-text">Java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">默认构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="nav-number">2.</span> <span class="nav-text">构造函数的继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin"><span class="nav-number"></span> <span class="nav-text">Kotlin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Instantiation"><span class="nav-number">1.</span> <span class="nav-text">Instantiation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Constructor"><span class="nav-number">2.</span> <span class="nav-text">Constructor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Primary-Constructor"><span class="nav-number">2.1.</span> <span class="nav-text">Primary Constructor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Secondary-Constructor"><span class="nav-number">2.2.</span> <span class="nav-text">Secondary Constructor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Constructor%E7%BB%A7%E6%89%BF"><span class="nav-number">2.3.</span> <span class="nav-text">Constructor继承</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bubble</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

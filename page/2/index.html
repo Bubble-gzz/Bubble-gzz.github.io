@@ -249,6 +249,256 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/17/%E8%B4%9F%E6%95%B0%E7%9A%84%E5%B7%A6%E7%A7%BB%E5%8F%B3%E7%A7%BB%E5%85%B6%E5%AE%9E%E5%BE%88%E5%A5%BD%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/17/%E8%B4%9F%E6%95%B0%E7%9A%84%E5%B7%A6%E7%A7%BB%E5%8F%B3%E7%A7%BB%E5%85%B6%E5%AE%9E%E5%BE%88%E5%A5%BD%E7%90%86%E8%A7%A3/" itemprop="url">负数的左移右移其实很好理解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-17T09:34:10+08:00">
+                2022-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bubble/" itemprop="url" rel="index">
+                    <span itemprop="name">bubble</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在机器中，整数的二进制数都是补码。而整数的乘2和除2（下取整，floor(7&#x2F;3)&#x3D;2, floor(-7&#x2F;3)&#x3D;-4 ）都是通过补码的位移来实现的。<br>关于位移这一简单的小妙招为什么合理，正数可能没啥好说的，但关键是负数也成立，这就不得不说补码的设计还是很巧妙的，这就是又一个体现<br><strong>省时间直接跳到最后一部分</strong></p>
+<h2 id="正数的左移和右移"><a href="#正数的左移和右移" class="headerlink" title="正数的左移和右移"></a>正数的左移和右移</h2><p>正数很容易理解，例如在8位的补码中：<br>例如<code>5×2=10</code>，要让<code>5</code>变成2倍，只需要将补码左移一位，尾巴上加<code>0</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00000101 // 5</span><br><span class="line">00001010 // 10</span><br></pre></td></tr></table></figure>
+<p>类似地，<code>13/2=6</code>，要让<code>13</code>整除2，只需要将补码右移一位，高位补<code>0</code>（扔掉原来的最低位）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00001101 // 13</span><br><span class="line">00000110 // 6</span><br></pre></td></tr></table></figure>
+<p>要想理解上面的机制，首先需要理解<strong>位权</strong>的概念，也就是每一位都有一个权值，表示这一位的<code>1</code>所代表的真实值，假设从0开始依次给低位到高位标号，那么二进制中第<code>i</code>位的位权就为<code>2^i</code>。<br>例如<code>13</code>的二进制数<code>00001101</code>，在第<code>0,1,3</code>位分别有一个<code>1</code>，位权分别为<code>1,4,8</code>，因此这个二进制对应的真实值就是<code>1+4+8=13</code><br>有了位权的概念，就很容易理解左移右移的含义了。<strong>左移相当于所有位权都×2，自然整个数的数值×2，右移相当于所有位权&#x2F;2，自然整个数的数值&#x2F;2。</strong></p>
+<h2 id="负数的左移和右移"><a href="#负数的左移和右移" class="headerlink" title="负数的左移和右移"></a>负数的左移和右移</h2><h3 id="位权不管用了"><a href="#位权不管用了" class="headerlink" title="位权不管用了"></a>位权不管用了</h3><p>负数的左移右移似乎没那么好理解了。因为负数的补码没法用刚才的<strong>位权</strong>的概念。<br>例如-1的补码是<code>11111111</code>，你总不能还像正数那样按位权分解成 <code>-1=1+2+4+..+127</code>吧。<br>-1&#x2F;2&#x3D;?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">11111111 // -1</span><br><span class="line">01111111 // 127</span><br></pre></td></tr></table></figure>
+<p>正数的右移方法在这里似乎乱了套，并没有实现&#x2F;2的效果<br>所以补码中，虽然正负数的加减相性很完美（同余的概念），但乘除就得分开考虑了。</p>
+<h3 id="位权依然管用（最后一部分）"><a href="#位权依然管用（最后一部分）" class="headerlink" title="位权依然管用（最后一部分）"></a>位权依然管用（最后一部分）</h3><p>虽然负数的位移需要和正数分开讨论，但其实负数的位移机制和正数简直一模一样，依然可以用<strong>位权</strong>的方式去理解<br>不妨数数吧。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">11111111 // -1</span><br><span class="line">11111110 // -2</span><br><span class="line">11111101 // -3</span><br><span class="line">11111100 // -4</span><br><span class="line">11111011 // -5</span><br><span class="line">11111010 // -6</span><br><span class="line">11111001 // -7</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>发现了没有？其实相当于不断减1（废话）<br>其实如果仅仅把<code>0</code>和<code>1</code>看作一种符号，不妨试试交换它们的含义：<code>0</code>表示<code>1</code>,<code>1</code>表示<code>0</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">00000000 // -1</span><br><span class="line">00000001 // -2</span><br><span class="line">00000010 // -3</span><br><span class="line">00000011 // -4</span><br><span class="line">00000100 // -5</span><br><span class="line">00000101 // -6</span><br><span class="line">00000110 // -7</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>那不就和正数的数数一模一样了吗?<br>只不过是从0开始数，即<code>左边的值</code>和<code>右边的绝对值</code>相比，有<code>-1</code>的偏移量。<br>这个时候<code>左边的值</code>就可以用位权的概念去理解了。</p>
+<h4 id="左移"><a href="#左移" class="headerlink" title="左移"></a>左移</h4><p>比如要求<code>-3×2</code>的结果，<br>可以用<code>左边的值</code>左移来扩大一倍，<code>00000010 -&gt; 00000100</code><br>但由于存在<code>-1</code>的偏移量，所以还需要适当调整</p>
+<p>观察下表</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">原数</th>
+<th align="center">原数×2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">右边的绝对值</td>
+<td align="center">3</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">左边的值</td>
+<td align="center">2</td>
+<td align="center">5</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">原数</th>
+<th align="center">原数×2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">右边的绝对值</td>
+<td align="center">4</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">左边的值</td>
+<td align="center">3</td>
+<td align="center">7</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>容易发现不管奇数还是偶数，<code>左边的值</code>变化规律都是<strong>左移1位再加1修正</strong></p>
+</blockquote>
+<p>比如<code>(-3)-&gt;(-6)</code>的过程为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">00000010</span><br><span class="line">00000100 //左移1位，尾巴补0</span><br><span class="line">00000101 //尾巴加1修正</span><br></pre></td></tr></table></figure>
+<p>如果把0和1的含义再换回去呢？即变成原来真正意义上的补码呢</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">11111101</span><br><span class="line">11111011 //左移1位， 尾巴补1</span><br><span class="line">11111010 //尾巴减1修正</span><br></pre></td></tr></table></figure>
+<p><strong>其实相当于直接将补码左移1位，尾巴补0，和正数一样。</strong></p>
+<h4 id="右移"><a href="#右移" class="headerlink" title="右移"></a>右移</h4><p>那么类似地，右移:</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">原数</th>
+<th align="center">原数&#x2F;2下取整</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">右边的绝对值</td>
+<td align="center">6</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">左边的值</td>
+<td align="center">5</td>
+<td align="center">2</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">原数</th>
+<th align="center">原数&#x2F;2下取整</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">右边的绝对值</td>
+<td align="center">7</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">左边的值</td>
+<td align="center">6</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>不管奇数还是偶数，<code>左边的值</code>的变化规律都是<strong>直接右移1位</strong><br>例如<code>(-7)-&gt;(-4)</code></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00000110</span><br><span class="line">00000011 //右移1位，高位补0</span><br></pre></td></tr></table></figure>
+<p>把0和1的含义换回去，变成原来的补码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">11111001</span><br><span class="line">11111100 //右移1位，高位补1</span><br></pre></td></tr></table></figure>
+<p><strong>相当于直接右移，高位补1。和正数很类似，只是高位补1而不是0</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>补码确实是个很有趣的发明。用同余的概念将负数映射为正数，方便了机器内的加减运算。同时还有很多自成体系的和谐的小性质。<br>例如看最高位是0还是1就可以泾渭分明地直接区分正数和负数；同时内部的顺序又没有乱，从0开始数，可以很自然地数到最大正数，然后跨一步到达最小负数，然后再数回到0，就像“地球是圆的”这个道理。此外，正数部分就像阳面，负数部分就像阴面，正数从1开始数每次加1，负数从-1开始数每次减1，一个数和它的相反数的补码之和在自然溢出后恰好为0…… 总之挺优美的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/12/%E5%AF%B9C-%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E8%AF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1636,7 +1886,7 @@ Default Parameter:
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1647,7 +1897,7 @@ Default Parameter:
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1658,7 +1908,7 @@ Default Parameter:
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1729,7 +1979,7 @@ Default Parameter:
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

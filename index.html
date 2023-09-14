@@ -249,6 +249,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/13/Constructor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/09/13/Constructor/" itemprop="url">Constructor</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-09-13T18:52:08+08:00">
+                2023-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Object-Oriented-Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Object-Oriented Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>记录一下关于类的构造函数以及初始化相关的东西。<br>有两大问题，其中一个是隐式默认函数，另一个是构造函数的继承。<br>隐式默认函数是指在用户没有显式定义构造函数的时候编译器自动隐式定义的默认构造函数，由于这是默认添加的，<br>如果没有搞清楚背后的行为很容易造成初始化遗漏的问题。<br>另一个问题是构造函数的继承，当一个子类继承自父类时，继承了属性和方法，但是继承函数呢？继承函数又可能很多，分为默认的和非默认的，<br>这个时候继承的内容似乎又变得更加混乱了。<br>目前似乎没有语言是默认子类继承父类的构造函数的，而是需要显式地定义子类的构造函数或是从父类继承。<br>鉴于这两个问题的复杂和琐碎，各个语言的处理方式不尽相同，所以作一个整理记录。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>首先有一个各类语言都差不多的逻辑，那就是属性直接赋值是先于构造函数发生的，以java为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">    Arr()&#123;a=<span class="number">2</span>;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终a的值会变成2。</p>
+<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><h3 id="花括号初始化"><a href="#花括号初始化" class="headerlink" title="花括号初始化"></a>花括号初始化</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A = arr&#123;&#125;;              <span class="comment">// ok</span></span><br><span class="line">    arr B = arr&#123;<span class="number">1</span>&#125;;             <span class="comment">// ok</span></span><br><span class="line">    arr C = arr&#123;<span class="number">1</span>, <span class="string">&quot;hello&quot;</span>&#125;;    <span class="comment">// ok</span></span><br><span class="line">    arr D = arr&#123;<span class="string">&quot;hello&quot;</span>, <span class="number">1</span>&#125;;    <span class="comment">// compile error</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>当没有定义constructor时，用花括号的内容可以对号入座地进行初始化。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>(<span class="type">int</span> _a, string _b):a&#123;_a&#125;,b&#123;_b&#125;&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A = arr&#123;&#125;;              <span class="comment">// compile error</span></span><br><span class="line">    arr B = arr&#123;<span class="number">1</span>&#125;;             <span class="comment">// compile error</span></span><br><span class="line">    arr C = arr&#123;<span class="number">1</span>, <span class="string">&quot;hello&quot;</span>&#125;;    <span class="comment">// ok</span></span><br><span class="line">    arr D = arr&#123;<span class="string">&quot;hello&quot;</span>, <span class="number">1</span>&#125;;    <span class="comment">// compile error</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当定义了constructor时，不再执行默认的对号入座初始化，而是调用对应参数格式的constructor<br>没有参数时也是同样的道理：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>()&#123; a = <span class="number">5</span>; b = <span class="string">&quot;hello&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A = arr&#123;&#125;;</span><br><span class="line">    cout &lt;&lt; A.a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; A.b; <span class="comment">//5 hello</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意花括号初始化隐藏了一个默认值的规则，也就是当填写的参数少于实际需要的参数时，后面的参数默认为0或是其它对应的默认初始值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a,b,c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A&#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.b&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.c&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;endl; <span class="comment">// 1 2 0</span></span><br><span class="line">    <span class="type">int</span> list[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) cout&lt;&lt;list[i]&lt;&lt;<span class="string">&quot; &quot;</span>; <span class="comment">// 1 2 0 0 0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="初始化以及创建临时实例"><a href="#初始化以及创建临时实例" class="headerlink" title="初始化以及创建临时实例"></a>初始化以及创建临时实例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>(<span class="type">int</span> _a, string _b): a&#123;_a&#125;, <span class="built_in">b</span>(_b) &#123; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(arr A)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; A.a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; A.b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A = &#123;<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>&#125;;</span><br><span class="line">    arr B&#123;<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>&#125;;</span><br><span class="line">    arr C = <span class="built_in">arr</span>(<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="built_in">foo</span>(A);</span><br><span class="line">    <span class="built_in">foo</span>(B);</span><br><span class="line">    <span class="built_in">foo</span>(C);</span><br><span class="line">    <span class="built_in">foo</span>(<span class="built_in">arr</span>(<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>));</span><br><span class="line">    <span class="built_in">foo</span>(arr&#123;<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">5 hello</span></span><br><span class="line"><span class="comment">5 hello</span></span><br><span class="line"><span class="comment">5 hello</span></span><br><span class="line"><span class="comment">5 hello</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>可以看到不同的创建临时实例的方式，实际上都是调用了对应参数的constructor。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a,b,c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(arr A)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.b&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.c&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">foo</span>(&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;);</span><br><span class="line">    <span class="built_in">foo</span>(arr&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>给没有显式构造函数的类型传递参数时，对号入座法也适用。</p>
+<h3 id="default-constructor"><a href="#default-constructor" class="headerlink" title="default constructor"></a>default constructor</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;endl;</span><br><span class="line">    arr B&#123;&#125;;</span><br><span class="line">    cout&lt;&lt;B.a&lt;&lt;endl;</span><br><span class="line">    arr C = <span class="built_in">arr</span>();</span><br><span class="line">    cout&lt;&lt;C.a&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">112197632</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">arr</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    arr A;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;endl;</span><br><span class="line">    arr B = <span class="built_in">arr</span>();</span><br><span class="line">    cout&lt;&lt;B.a&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">-38797312</span></span><br><span class="line"><span class="comment">-421528752</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>可以看到不显式地进行初始化导致初始值不干净的问题。查阅资料可知，当没有显式定义constructor的时候，<br>编译器会隐式地定义一个默认的constructor，但这个constructor到底会不会贴心地给属性初始化为默认值，我不好说。<br>所以有两种方法可以确保属性被正确地初始化为默认值：<br>（1）不定义任何constructor，然后用空{}的形式进行对号入座式的初始化<br>（2）显式定义一个不带参数的default constructor，然后在里面手动初始化，实例化的时候可以采用下面几种写法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr A; <span class="comment">//默认调用default constructor</span></span><br><span class="line">arr A=<span class="built_in">arr</span>(); <span class="comment">//显式调用default constructor</span></span><br><span class="line">arr A&#123;&#125;; <span class="comment">//显式调用default constructor</span></span><br><span class="line">arr A = &#123;&#125;; <span class="comment">//显式调用default constructor</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>(<span class="type">int</span> _a, string _b):a&#123;_a&#125;,b&#123;_b&#125;&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">arr <span class="title">A</span><span class="params">(<span class="number">5</span>, <span class="string">&quot;hello&quot;</span>)</span></span>;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.b&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以使用<code>arr A(5, &quot;hello&quot;)</code>代替<code>arr A = arr(5, &quot;hello&quot;)</code>。但是看下面这种情况</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    string b;</span><br><span class="line">    <span class="built_in">arr</span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">arr <span class="title">A</span><span class="params">()</span></span>;</span><br><span class="line">    cout&lt;&lt;A.a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;A.b&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>却会编译错误，提示A是一个函数。这里是声明了一个没有参数的，返回值为arr的函数A。这也被称为”the most vexing parse”之一。</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>下面是最头疼的继承。c++的继承还没有研究，先不说。</p>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><h3 id="默认构造函数"><a href="#默认构造函数" class="headerlink" title="默认构造函数"></a>默认构造函数</h3><p>Java如果没有显示定义构造函数，那么会有一个空的默认构造函数。如果用户定义了至少一个构造函数，那么编译器就不会再自动定义空的默认构造函数，这时如果<br>用户希望使用 new A()这种无参数的构造函数，就需要自己手动定义。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">    Arr()&#123;&#125; <span class="comment">//必须要！ 如果去掉，那么*处就会报错，找不到对应格式的构造函数</span></span><br><span class="line">    Arr(<span class="type">int</span> _a, <span class="type">int</span> _b)&#123;</span><br><span class="line">        a=_a; b= _b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">        <span class="type">Arr</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Arr</span>(); <span class="comment">// * </span></span><br><span class="line">        System.out.println(temp.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="构造函数的继承"><a href="#构造函数的继承" class="headerlink" title="构造函数的继承"></a>构造函数的继承</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a, b;</span><br><span class="line">    Arr()&#123;a=<span class="number">5</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Brr</span> <span class="keyword">extends</span> <span class="title class_">Arr</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">        <span class="type">Arr</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Arr</span>();</span><br><span class="line">        <span class="type">Brr</span> <span class="variable">temp2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Brr</span>();</span><br><span class="line">        System.out.println(temp.a + <span class="string">&quot; &quot;</span> + temp2.a); <span class="comment">//5 5</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，Brr默认继承了Arr的构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Arr</span>&#123;</span><br><span class="line">    <span class="type">int</span> a, b;</span><br><span class="line">    Arr(<span class="type">int</span> _a)&#123;a=_a;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Brr</span> <span class="keyword">extends</span> <span class="title class_">Arr</span> &#123; <span class="comment">//error:There is no default constructor in Arr</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到这个时候编译器报错。<br>子类必须显式地在构造函数中调用父类的某个构造函数super(…)，如果没有，那么会默认调用父类的default constructor。<br>第一个例子之所以没有报错是因为父类有default constructor。</p>
+<p>其中设计者的逻辑可能是，子类的初始化至少应该符合父类的某种初始化形式，而不是完全脱离父类的初始化?<br>既然子类可以override父类的方法，为什么不能override父类的构造函数呢？<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14250486/why-exactly-do-subclass-constructors-have-to-explicitly-call-super-class-constru#:~:text=This%20is%20required%20because%20the,parameters%20need%20to%20be%20passed">这个链接说的不错</a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Java中，构造函数不会默认继承，子类在继承父类的时候，每一个构造函数都应当显式地在开头调用父类的某个构造函数。</p>
+<h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><h3 id="Instantiation"><a href="#Instantiation" class="headerlink" title="Instantiation"></a>Instantiation</h3><p>Kotlin不用new关键字，直接调用构造函数：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> bob = Student(<span class="number">1</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor</h3><p>Kotlin的构造函数比较独特，一个类可以拥有一个primary constructor和若干个secondary constructor，<br>primary constructor用于声明属性和完成必备的初始化，secondary constructor用于额外的初始化，<br>secondary constructor必须显式地调用primary constructor。</p>
+<h4 id="Primary-Constructor"><a href="#Primary-Constructor" class="headerlink" title="Primary Constructor"></a>Primary Constructor</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>(<span class="keyword">val</span> age:<span class="built_in">Int</span>, <span class="keyword">var</span> grade:<span class="built_in">Int</span>, param:<span class="built_in">Int</span>) <span class="comment">//manner A</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> age:<span class="built_in">Int</span>, <span class="keyword">var</span> grade:<span class="built_in">Int</span>, param:<span class="built_in">Int</span>) <span class="comment">//manner B</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> age:<span class="built_in">Int</span>, <span class="keyword">var</span> grade:<span class="built_in">Int</span>, param:<span class="built_in">Int</span>)&#123;&#125; <span class="comment">//manner C</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在主体部分没有代码的情况下，可以省略花括号，写法C简化成写法B，<br>在没有额外的修饰词的情况下，写法B又可以简写成写法A。<br>出现在参数列表中以val或者var修饰的参数都会默认成为property，否则只是一个用于初始化的临时参数。<br>primary constructor的初始化代码被放在Initializer Block中。<br>代码按照从上到下的顺序依次执行遇到的property initializer和initializer block。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InitOrderDemo</span></span>(name: String) &#123;</span><br><span class="line">    <span class="keyword">val</span> firstProperty = <span class="string">&quot;First property: <span class="variable">$name</span>&quot;</span>.also(::println)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;First initializer block that prints <span class="variable">$name</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">val</span> secondProperty = <span class="string">&quot;Second property: <span class="subst">$&#123;name.length&#125;</span>&quot;</span>.also(::println)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Second initializer block that prints <span class="subst">$&#123;name.length&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">First property: hello</span></span><br><span class="line"><span class="comment">First initializer block that prints hello</span></span><br><span class="line"><span class="comment">Second property: 5</span></span><br><span class="line"><span class="comment">Second initializer block that prints 5</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>可以啥也不写，会有一个默认的空的构造函数:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dumb</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value:<span class="built_in">Int</span> = <span class="number">5</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> dumb = Dumb()</span><br><span class="line">    println(<span class="string">&quot;dumb.value: <span class="subst">$&#123;dumb.value&#125;</span>&quot;</span>) <span class="comment">// dumb.value: 5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Secondary-Constructor"><a href="#Secondary-Constructor" class="headerlink" title="Secondary Constructor"></a>Secondary Constructor</h4><p>二级构造函数的执行发生在主构造函数部分（包括initializer block和property initializer）之后。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Constructors</span> </span>&#123;</span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Init block A&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">constructor</span>(i: <span class="built_in">Int</span>) &#123;</span><br><span class="line">        println(<span class="string">&quot;Constructor <span class="variable">$value</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> value:<span class="built_in">Int</span> = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Init block B&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">Init block A</span></span><br><span class="line"><span class="comment">Init block B</span></span><br><span class="line"><span class="comment">Constructor 4</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>二级构造函数必须直接或间接调用一级构造函数（如果有的话）。<br>二级构造函数的参数不允许使用val或者var修饰，只用于传参目的。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>(<span class="keyword">var</span> age:<span class="built_in">Int</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> grade:<span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> height:<span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">init</span> &#123; println(<span class="string">&quot;constructor A    age: <span class="variable">$age</span>&quot;</span>) &#125;</span><br><span class="line">    <span class="keyword">constructor</span>(age:<span class="built_in">Int</span>, grade:<span class="built_in">Int</span>):<span class="keyword">this</span>(age)</span><br><span class="line">    &#123;</span><br><span class="line">        println(<span class="string">&quot;constructor B1&quot;</span>)</span><br><span class="line">        <span class="keyword">this</span>.grade = grade;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">constructor</span>(age:<span class="built_in">Int</span>, grade:<span class="built_in">Int</span>, height:<span class="built_in">Int</span>):<span class="keyword">this</span>(age, grade)</span><br><span class="line">    &#123;</span><br><span class="line">        println(<span class="string">&quot;constructor B2&quot;</span>)</span><br><span class="line">        <span class="keyword">this</span>.height = height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> bob = Student(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">constructor A    age: 1</span></span><br><span class="line"><span class="comment">constructor B1</span></span><br><span class="line"><span class="comment">constructor B2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>没有定义主构造函数，那么二级构造函数就可以没有交集了。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dumb</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value:<span class="built_in">Int</span> = <span class="number">5</span></span><br><span class="line">    <span class="keyword">var</span> name:String = <span class="string">&quot;someone&quot;</span></span><br><span class="line">    <span class="keyword">constructor</span>(value:<span class="built_in">Int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">constructor</span>(name:String)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> dumb1 = Dumb(<span class="number">132</span>)</span><br><span class="line">    <span class="keyword">val</span> dumb2 = Dumb(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    println(<span class="string">&quot;dumb1.value: <span class="subst">$&#123;dumb1.value&#125;</span> dumb1.name: <span class="subst">$&#123;dumb1.name&#125;</span>&quot;</span>)</span><br><span class="line">    println(<span class="string">&quot;dumb2.value: <span class="subst">$&#123;dumb2.value&#125;</span> dumb2.name: <span class="subst">$&#123;dumb2.name&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">dumb1.value: 132 dumb1.name: someone</span></span><br><span class="line"><span class="comment">dumb2.value: 5 dumb2.name: hello</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Constructor继承"><a href="#Constructor继承" class="headerlink" title="Constructor继承"></a>Constructor继承</h4><p>不管是直接还是间接，每一个构造函数都必须调用基类的某一个构造函数。<br>其中主构造函数调用时使用基类的名称，而二级构造函数调用时使用关键字super。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Base</span></span>(p: <span class="built_in">Int</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span></span>(p: <span class="built_in">Int</span>) : Base(p)</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyView</span> : <span class="type">View &#123;</span></span></span><br><span class="line">    <span class="keyword">constructor</span>(ctx: Context) : <span class="keyword">super</span>(ctx)</span><br><span class="line">    <span class="keyword">constructor</span>(ctx: Context, attrs: AttributeSet) : <span class="keyword">super</span>(ctx, attrs)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在继承的时候，子类在保证调用基类构造函数的基础上，同样可以定义自己的property，两者并不冲突。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Dumb</span></span>(<span class="keyword">var</span> value:<span class="built_in">Int</span> = <span class="number">5</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> name:String = <span class="string">&quot;someone&quot;</span></span><br><span class="line">    <span class="keyword">constructor</span>(value:<span class="built_in">Int</span>, name:String):<span class="keyword">this</span>(value)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BigDumb</span></span>(value:<span class="built_in">Int</span>, <span class="keyword">var</span> weight:<span class="built_in">Int</span> = <span class="number">100</span>):Dumb(value)&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> bob = Student(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">val</span> dumb = BigDumb(<span class="number">5</span>)</span><br><span class="line">    println(<span class="string">&quot;dumb.value: <span class="subst">$&#123;dumb.value&#125;</span>  dumb.name: <span class="subst">$&#123;dumb.weight&#125;</span>&quot;</span>) <span class="comment">//dumb.value: 5  dumb.weight: 100</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>kotlin比较有意思的一点是使用了两级构造函数，其中主构造函数颇有一种将类变成函数的意味，主构造函数的参数位于整个类的最顶部，<br>是类的DNA，是类最核心的参数，这样可以确保类最关键的参数被传进来，这种设计更加科学合理，可以减少bug。</p>
+<p>参考内容: <a target="_blank" rel="noopener" href="https://kotlinlang.org/docs">kotlinlang.org&#x2F;docs</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/10/c-sharp-%E8%AF%AD%E6%B3%95%E4%B9%8Bupcast-downcast/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -353,7 +551,12 @@
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sword sword2 = (Sword)item;</span><br></pre></td></tr></table></figure>
 <p>我们新建一个对象sword2，将item强制转化为Sword类型(注意这里必须说清楚你要转化的类型，否则编译也会失败，这也很好理解，因为程序不知道你要转化成什么，万一是Sword的子类呢？也是有可能的哦)，成功了！<br>那我们就好奇了，sword2现在是谁呢？是sword本体呢，还是一个复制品呢？它的atk值是多少呢？</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Sword sword = <span class="keyword">new</span> Sword();</span><br><span class="line">sword.atk = <span class="number">1</span>;</span><br><span class="line">Item item = sword;</span><br><span class="line">Sword sword2 = (Sword)item;</span><br><span class="line">sword.atk = <span class="number">5</span>;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;sword2.atk = &quot;</span> + sword2.atk); <span class="comment">// Output: sword2.atk = 5</span></span><br><span class="line">sword2.atk = <span class="number">10</span>;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;sword.atk = &quot;</span> + sword.atk); <span class="comment">// Output : sword.atk = 10</span></span><br></pre></td></tr></table></figure>
-<p>通过上面这个实验，真相已经很显然了，sword2就是sword，虽然经过了item这个中间容器，但sword还是无损地传到了sword2中。<br>综合上面的种种现象，我得出结论：<br><strong><code>upcast</code>将子类对象存放到父类对象时，并不是将子类对象进行简化，而是存放了一个子类本体引用，暂时对外隐藏了父类中不存在的内容。</strong><br>例如这个例子中，item还是指代sword，只不过暂时无法通过item来访问sword.atk。<br>不过我们对于<code>downcast</code>似乎还有不太了解的地方。可以将父类转化为子类？怎么听都很扯啊，毕竟子类有父类中不存在的内容，难道c#可以无中生有吗？<br>但上面的downcast之所以可以成功，一个重要因素在于sword2的类型和item中对象的类型是一致的，都是Sword。<br>我们来试试<code>downcast</code>到另一个不同的子类：</p>
+<p>通过上面这个实验，真相已经很显然了，sword2就是sword，虽然经过了item这个中间容器，但sword还是无损地传到了sword2中。<br>综合上面的种种现象，我得出结论：</p>
+<blockquote>
+<p><code>upcast</code>将子类对象存放到父类对象时，并不是将子类对象进行简化，而是存放了一个子类本体引用，暂时对外隐藏了父类中不存在的内容。</p>
+</blockquote>
+<p>例如这个例子中，item还是指代sword，只不过暂时无法通过item来访问sword.atk。</p>
+<p>不过我们对于<code>downcast</code>似乎还有不太了解的地方。可以将父类转化为子类？怎么听都很扯啊，毕竟子类有父类中不存在的内容，难道c#可以无中生有吗？<br>但上面的downcast之所以可以成功，一个重要因素在于sword2的类型和item中对象的类型是一致的，都是Sword。<br>我们来试试<code>downcast</code>到另一个不同的子类：</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sword sword = <span class="keyword">new</span> Sword();</span><br><span class="line">sword.atk = <span class="number">1</span>;</span><br><span class="line">Item item = sword;</span><br><span class="line">Shield shield = (Shield) item; <span class="comment">// System.InvalidCastException!!</span></span><br></pre></td></tr></table></figure>
 <p>结果出现了异常。这说明<code>downcast</code>也不是什么魔法。如果父类中存放的对象类型和<code>downcast</code>目标类型不兼容，也是会有问题的。<br>而这种问题编译时是无法发现的，只有运行时才会检验出来咯。</p>
 <p>知道了这些，我们就可以放心地使用<code>upcast</code>和<code>downcast</code>来写背包功能啦！当然再比如可插拔式的敌人AI（就像芯片那样）也可以用同样的方法！</p>
@@ -1583,256 +1786,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/17/%E8%B4%9F%E6%95%B0%E7%9A%84%E5%B7%A6%E7%A7%BB%E5%8F%B3%E7%A7%BB%E5%85%B6%E5%AE%9E%E5%BE%88%E5%A5%BD%E7%90%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bubble">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/beer.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's bubble">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/17/%E8%B4%9F%E6%95%B0%E7%9A%84%E5%B7%A6%E7%A7%BB%E5%8F%B3%E7%A7%BB%E5%85%B6%E5%AE%9E%E5%BE%88%E5%A5%BD%E7%90%86%E8%A7%A3/" itemprop="url">负数的左移右移其实很好理解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-17T09:34:10+08:00">
-                2022-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bubble/" itemprop="url" rel="index">
-                    <span itemprop="name">bubble</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在机器中，整数的二进制数都是补码。而整数的乘2和除2（下取整，floor(7&#x2F;3)&#x3D;2, floor(-7&#x2F;3)&#x3D;-4 ）都是通过补码的位移来实现的。<br>关于位移这一简单的小妙招为什么合理，正数可能没啥好说的，但关键是负数也成立，这就不得不说补码的设计还是很巧妙的，这就是又一个体现<br><strong>省时间直接跳到最后一部分</strong></p>
-<h2 id="正数的左移和右移"><a href="#正数的左移和右移" class="headerlink" title="正数的左移和右移"></a>正数的左移和右移</h2><p>正数很容易理解，例如在8位的补码中：<br>例如<code>5×2=10</code>，要让<code>5</code>变成2倍，只需要将补码左移一位，尾巴上加<code>0</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00000101 // 5</span><br><span class="line">00001010 // 10</span><br></pre></td></tr></table></figure>
-<p>类似地，<code>13/2=6</code>，要让<code>13</code>整除2，只需要将补码右移一位，高位补<code>0</code>（扔掉原来的最低位）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00001101 // 13</span><br><span class="line">00000110 // 6</span><br></pre></td></tr></table></figure>
-<p>要想理解上面的机制，首先需要理解<strong>位权</strong>的概念，也就是每一位都有一个权值，表示这一位的<code>1</code>所代表的真实值，假设从0开始依次给低位到高位标号，那么二进制中第<code>i</code>位的位权就为<code>2^i</code>。<br>例如<code>13</code>的二进制数<code>00001101</code>，在第<code>0,1,3</code>位分别有一个<code>1</code>，位权分别为<code>1,4,8</code>，因此这个二进制对应的真实值就是<code>1+4+8=13</code><br>有了位权的概念，就很容易理解左移右移的含义了。<strong>左移相当于所有位权都×2，自然整个数的数值×2，右移相当于所有位权&#x2F;2，自然整个数的数值&#x2F;2。</strong></p>
-<h2 id="负数的左移和右移"><a href="#负数的左移和右移" class="headerlink" title="负数的左移和右移"></a>负数的左移和右移</h2><h3 id="位权不管用了"><a href="#位权不管用了" class="headerlink" title="位权不管用了"></a>位权不管用了</h3><p>负数的左移右移似乎没那么好理解了。因为负数的补码没法用刚才的<strong>位权</strong>的概念。<br>例如-1的补码是<code>11111111</code>，你总不能还像正数那样按位权分解成 <code>-1=1+2+4+..+127</code>吧。<br>-1&#x2F;2&#x3D;?</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">11111111 // -1</span><br><span class="line">01111111 // 127</span><br></pre></td></tr></table></figure>
-<p>正数的右移方法在这里似乎乱了套，并没有实现&#x2F;2的效果<br>所以补码中，虽然正负数的加减相性很完美（同余的概念），但乘除就得分开考虑了。</p>
-<h3 id="位权依然管用（最后一部分）"><a href="#位权依然管用（最后一部分）" class="headerlink" title="位权依然管用（最后一部分）"></a>位权依然管用（最后一部分）</h3><p>虽然负数的位移需要和正数分开讨论，但其实负数的位移机制和正数简直一模一样，依然可以用<strong>位权</strong>的方式去理解<br>不妨数数吧。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">11111111 // -1</span><br><span class="line">11111110 // -2</span><br><span class="line">11111101 // -3</span><br><span class="line">11111100 // -4</span><br><span class="line">11111011 // -5</span><br><span class="line">11111010 // -6</span><br><span class="line">11111001 // -7</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>发现了没有？其实相当于不断减1（废话）<br>其实如果仅仅把<code>0</code>和<code>1</code>看作一种符号，不妨试试交换它们的含义：<code>0</code>表示<code>1</code>,<code>1</code>表示<code>0</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">00000000 // -1</span><br><span class="line">00000001 // -2</span><br><span class="line">00000010 // -3</span><br><span class="line">00000011 // -4</span><br><span class="line">00000100 // -5</span><br><span class="line">00000101 // -6</span><br><span class="line">00000110 // -7</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>那不就和正数的数数一模一样了吗?<br>只不过是从0开始数，即<code>左边的值</code>和<code>右边的绝对值</code>相比，有<code>-1</code>的偏移量。<br>这个时候<code>左边的值</code>就可以用位权的概念去理解了。</p>
-<h4 id="左移"><a href="#左移" class="headerlink" title="左移"></a>左移</h4><p>比如要求<code>-3×2</code>的结果，<br>可以用<code>左边的值</code>左移来扩大一倍，<code>00000010 -&gt; 00000100</code><br>但由于存在<code>-1</code>的偏移量，所以还需要适当调整</p>
-<p>观察下表</p>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">原数</th>
-<th align="center">原数×2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">右边的绝对值</td>
-<td align="center">3</td>
-<td align="center">6</td>
-</tr>
-<tr>
-<td align="center">左边的值</td>
-<td align="center">2</td>
-<td align="center">5</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">原数</th>
-<th align="center">原数×2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">右边的绝对值</td>
-<td align="center">4</td>
-<td align="center">8</td>
-</tr>
-<tr>
-<td align="center">左边的值</td>
-<td align="center">3</td>
-<td align="center">7</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>容易发现不管奇数还是偶数，<code>左边的值</code>变化规律都是<strong>左移1位再加1修正</strong></p>
-</blockquote>
-<p>比如<code>(-3)-&gt;(-6)</code>的过程为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">00000010</span><br><span class="line">00000100 //左移1位，尾巴补0</span><br><span class="line">00000101 //尾巴加1修正</span><br></pre></td></tr></table></figure>
-<p>如果把0和1的含义再换回去呢？即变成原来真正意义上的补码呢</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">11111101</span><br><span class="line">11111011 //左移1位， 尾巴补1</span><br><span class="line">11111010 //尾巴减1修正</span><br></pre></td></tr></table></figure>
-<p><strong>其实相当于直接将补码左移1位，尾巴补0，和正数一样。</strong></p>
-<h4 id="右移"><a href="#右移" class="headerlink" title="右移"></a>右移</h4><p>那么类似地，右移:</p>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">原数</th>
-<th align="center">原数&#x2F;2下取整</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">右边的绝对值</td>
-<td align="center">6</td>
-<td align="center">3</td>
-</tr>
-<tr>
-<td align="center">左边的值</td>
-<td align="center">5</td>
-<td align="center">2</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">原数</th>
-<th align="center">原数&#x2F;2下取整</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">右边的绝对值</td>
-<td align="center">7</td>
-<td align="center">4</td>
-</tr>
-<tr>
-<td align="center">左边的值</td>
-<td align="center">6</td>
-<td align="center">3</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>不管奇数还是偶数，<code>左边的值</code>的变化规律都是<strong>直接右移1位</strong><br>例如<code>(-7)-&gt;(-4)</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00000110</span><br><span class="line">00000011 //右移1位，高位补0</span><br></pre></td></tr></table></figure>
-<p>把0和1的含义换回去，变成原来的补码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">11111001</span><br><span class="line">11111100 //右移1位，高位补1</span><br></pre></td></tr></table></figure>
-<p><strong>相当于直接右移，高位补1。和正数很类似，只是高位补1而不是0</strong></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>补码确实是个很有趣的发明。用同余的概念将负数映射为正数，方便了机器内的加减运算。同时还有很多自成体系的和谐的小性质。<br>例如看最高位是0还是1就可以泾渭分明地直接区分正数和负数；同时内部的顺序又没有乱，从0开始数，可以很自然地数到最大正数，然后跨一步到达最小负数，然后再数回到0，就像“地球是圆的”这个道理。此外，正数部分就像阳面，负数部分就像阴面，正数从1开始数每次加1，负数从-1开始数每次减1，一个数和它的相反数的补码之和在自然溢出后恰好为0…… 总之挺优美的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1887,7 +1840,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1898,7 +1851,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1909,7 +1862,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1980,7 +1933,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
