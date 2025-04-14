@@ -249,6 +249,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/17/%E6%95%B0%E5%AD%A6%E5%A6%82%E6%9E%9C%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98%EF%BC%8C%E9%82%A3%E4%B8%80%E5%AE%9A%E6%98%AF%E6%88%91%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/17/%E6%95%B0%E5%AD%A6%E5%A6%82%E6%9E%9C%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98%EF%BC%8C%E9%82%A3%E4%B8%80%E5%AE%9A%E6%98%AF%E6%88%91%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="url">如果数学出了问题，那一定是我的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-17T19:45:42+08:00">
+                2022-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bubble/" itemprop="url" rel="index">
+                    <span itemprop="name">bubble</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天下午四点左右开始困扰到刚才七点半，此过程非常痛苦，痛苦到怀疑人生。<br>因为我知道，数学不会出问题，如果出了问题，那一定是我自己的问题，我出了大问题。</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>下午的计组课，本以为是和平的一堂课，但听了一耳朵之后突然意识到有些不对劲。<br>那就是补码的乘法运算。<br>在我的世界观中，原码转补码就是取模，<br>4位有符号整数的补码就是对<code>16</code>取模，32位有符号整数的补码就是对<code>4,294,967,296</code>取模。<br>在我的世界观中，我还知道一个关于取模的运算律:<code>(A*B)%M = (A%M)*(B%M) %M</code><br>所以很显然啊，<code>[A*B]补 = [A]补*[B]补 (自然溢出后)</code><br>因为比如在4位有符号整数中，<code>[X补] = X%16</code><br>所以有</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[A*B]补</span><br><span class="line">=(A*B)%16</span><br><span class="line">=(A%16)*(B%16)%16</span><br><span class="line">=[A]补*[B]补（自然溢出）</span><br></pre></td></tr></table></figure>
+
+<p>我也用程序进行了验证：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int a,b;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span><br><span class="line">    unsigned int _a = a, _b = b, _c, _d;</span><br><span class="line">    _c = _a * _b; //补码相乘</span><br><span class="line">    _d = a * b; //相乘后再转补码</span><br><span class="line">    printf(&quot;%u %u\n&quot;, _c, _d); //结果相同</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>可是如果是这么简单，为什么老师开始写满满一黑板啊？还有这个ppt是这么回事啊？怎么都在算！！！</strong><br>我开始意识到，哦，老师讲的例子都是定点小数……<br>定点小数可能和整数不太一样吧……<br>诶不对啊，定点小数不就是<strong>对2取模</strong>吗？本质上没啥区别吧？<br>整数可以的话，小数也可以吧？<br>但是从老师的讲述以及书本知识来看，<strong>小数没法直接补码相乘，至少负数和负数没法直接相乘</strong>。<br>我惊了。</p>
+<h2 id="数学天才"><a href="#数学天才" class="headerlink" title="数学天才"></a><del>数学天才</del></h2><p>书上写着，当<code>Y&lt;0</code>时，记<code>[Y]补=1.Y1Y2..Yn</code>，<br>有<code>[X*Y]补 = [X]补*0.Y1Y2..Yn + [-X]补</code><br>我想着，这么写虽然是对的，但是难道不能化简为<code>[X*Y]补 = [X]补*[Y]补</code>吗<br>于是我写出了下面这个<del>十分正确的</del>推算过程:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在模2的意义下:</span><br><span class="line">[X*Y]补</span><br><span class="line">=[X]补*0.Y1Y2..Yn + [-X]补    //书上的公式</span><br><span class="line">=[X]补*0.Y1Y2..Yn + (2-[X]补)</span><br><span class="line">=[X]补*0.Y1Y2..Yn - [X]补</span><br><span class="line">=[X]补*(0.Y1Y2..Yn - 1)</span><br><span class="line">=[X]补*(0.Y1Y2..Yn + 1)</span><br><span class="line">=[X]补*[Y]补                  //~~完全胜利~~</span><br></pre></td></tr></table></figure>
+<p>太好啦，这就说明书上的做法其实并不是唯一做法，事实上存在更简单的做法。<br>书上这么做，一定是为了方便后续的算法优化~~<br>带着胜利的心情我带入了一组样例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[X]补=1.001</span><br><span class="line">[Y]补=1.011</span><br><span class="line">[-X]补=0.111</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[X]补*[Y]补</span><br><span class="line">=1.001*1.011</span><br><span class="line">=1.001*(1+0.011)</span><br><span class="line">=1.001*0.011+1.001       //result_A</span><br><span class="line"></span><br><span class="line">[X]补*0.Y1Y2..Yn+[-X]补</span><br><span class="line">=1.001*0.011+0.111       //result_B</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>啊咧？？很显然在模2意义下<code>result_A</code>和<code>result_B</code>并不相等啊<br>可是刚才明明推出了<code>[X]补*0.Y1Y2..Yn+[-X]补 = [X]补*[Y]补</code><br>这是什么新型悖论？<br>我一直很清楚自己的运算基本功有多么糟糕，但我又花了十几分钟，得到的只是若干次的同样的结果。<br>我开始怀疑人生了。</p>
+<h2 id="察觉"><a href="#察觉" class="headerlink" title="察觉"></a>察觉</h2><p>我知道上面两个事实是矛盾的。这两个里面必定至少有一个是错的。<br>看着这本写满公式的教材，再看看实名认证的发明了<em>Booth算法</em>的Booth夫妇……<br>我知道，99.9999%的概率，我推出的那个等式是错的<br>这里面一定有什么地方是算错了。<br>我猜一定是<strong>取模</strong>。<br>经过一番挣扎，我突然发现了一个式子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 1.001*(0.011-1)%2</span><br><span class="line">=1.001*(0.011+1)%2</span><br></pre></td></tr></table></figure>
+<p>上面这个等式显然是错的，因为上下的值相差了<code>2*1.001 = 2.002</code>，它们在<code>模2</code>的意义下相差<code>0.002</code>，并不是同余关系<br>可是如果这么写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2*1.001 %2 = (2%2)*1.001 %2 = 0*1.001 %2 = 0</span><br></pre></td></tr></table></figure>
+<p><code>0 = 0.002</code>可不太对劲啊。<br>所以取模对小数不适用吗？？</p>
+<h2 id="重生"><a href="#重生" class="headerlink" title="重生"></a>重生</h2><p>我开始反思自己对取模的理解。<br>取模似乎是一种理所当然的东西，我都没有仔细想过它的合理性。<br>就好像苹果熟了就会掉到地上，而不会飞到天上一样。<br>来吧，<code>(A+B)%M = ( A%M + B%M )%M</code>，果真如此么？<br>果真如此。</p>
+<blockquote>
+<p>我可以想象有一个操场，一圈的长度为<code>M</code>。<br>那么<code>左边的式子</code>可以理解为<code>我从起点出发，一口气跑了(A+B)的路程，停留在哪个位置</code>。<br>而<code>右边的式子</code>可以理解为<code>我从起点出发，先跑了A的路程，然后原地休息片刻，继续跑了B的路程，最后停留在哪个位置</code>。<br>用脚指头想都知道，这两个是等价的，而且A和B可以是小数。</p>
+</blockquote>
+<p>那么接下来，<code>A*B %M = A*(B%M) %M</code>，果真如此么？</p>
+<blockquote>
+<p>左边的式子可以理解为我跑了A次，<code>每一次</code>都从上次结尾的位置出发，接着跑B的路程。<br>右边的式子可以理解为我跑了A次，<code>每一次</code>都从上次结尾的位置出发，接着跑B的路程，但是我发现B每包含完整的一圈，我就可以少跑这一圈，因为这是在做无用功。<br>也就是说在<code>每一次</code>结束的时候，<code>B</code>和<code>B%M</code>的实际效果是一样的，都会让我到达操场的同一个位置。</p>
+</blockquote>
+<p>所以当A是整数的时候，这个似乎没有任何问题。<br>但比较tricky的一点就是，<strong>当A是小数的时候，这个例子在概念上出现了根本性的区别。</strong><br>因为现在A可以取任意值，所以就没有<code>每一次</code>的概念。刚才我只会在跑完一次之后比较两种描述中我的位置是否相同，<br>可是当A可以取任意值的时候，这样的比较实际上成了一个连续的比较，也就是在每一个时间点的比较（假设规定两式中的<code>每一次</code>所耗费的时间长度相同）。<br>只要在某个时间点（对应某个A），在两种描述中我的位置不同，那就以为着存在一个A，使得这两个式子不相等。<br>这就好比体育课，<code>400m</code>的操场上有两个同学，同学甲用5分钟跑了2.5圈<code>B1=2.5*400</code>，同学乙用5分钟跑了0.5圈<code>B2=0.5*400</code>，他们跑的路程关于400是同余的<br>如果体育老师等他们出发之后就一直在终点玩手机，<strong>等他们都说跑完了再抬头看一眼</strong>，那么老师只知道这两个人都跑到同一个位置，却不知道他们跑的路程不同。<br>但如果老师<strong>一直盯着他俩看</strong>，在中途就可以发现两个人的位置并不相同，也就是A取任意数的时候，可以发现<code>A*B1%400 != A*B2%400</code>。</p>
+<p>回头看我推导的那个式子中的一步：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">模2意义下</span><br><span class="line"> [X]补*(0.Y1Y2..Yn - 1)</span><br><span class="line">=[X]补*(0.Y1Y2..Yn + 1)</span><br></pre></td></tr></table></figure>
+<p>这里[X]补并不是整数，因此这里不能用同余的性质。<br>破案了。</p>
+<p>所以小数的补码乘法确实不能简单地用补码相乘。<br>所以数学确实没有错。<br>所以再次发现自己是小丑。<br>但至少是一个安心的小丑啦~~~</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/17/post/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1809,153 +1981,11 @@ Default Parameter:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/18/python-numpy.dot()/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bubble">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/beer.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's bubble">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/02/18/python-numpy.dot()/" itemprop="url">python-numpy.dot()</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-18T15:34:22+08:00">
-                2022-02-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="python碎片-numpy-dot"><a href="#python碎片-numpy-dot" class="headerlink" title="python碎片-numpy.dot"></a>python碎片-numpy.dot</h1><p>numpy.dot(x,y)是一个善变的函数<br>当x和y都是一维数组时，返回x和y的内积，返回值是一个数值<br>当x和y都是二维数组时，返回x和y的矩阵乘法结果，返回值是一个矩阵<br>当x是一维数组，y是二维数组时，我无法解释，总之看起来并没有什么意义<br>下面这段程序演示了上述现象<br>值得注意的是,a,b,c看起来很像，但分别是 <strong>长度为3的一维数组、3×1的二维数组、1×3的二维数组</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment">#a=np.random.randn(3)</span></span><br><span class="line"><span class="comment">#b=np.random.randn(3,1)</span></span><br><span class="line"><span class="comment">#c=np.random.randn(1,3)</span></span><br><span class="line">a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b=[[<span class="number">1</span>],[<span class="number">2</span>],[<span class="number">3</span>]]</span><br><span class="line">c=[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line">ans0=np.dot(a,a)</span><br><span class="line">ans1=np.dot(a,b)</span><br><span class="line">ans2=np.dot(c,b)</span><br><span class="line"><span class="built_in">print</span>(ans0,ans1,ans2) <span class="comment"># 14 [14] [[14]]</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -2005,7 +2035,7 @@ Default Parameter:
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2098,7 +2128,7 @@ Default Parameter:
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

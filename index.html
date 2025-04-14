@@ -249,6 +249,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/14/lambda%E5%87%BD%E6%95%B0%E4%B8%8E%E9%97%AD%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2025/04/14/lambda%E5%87%BD%E6%95%B0%E4%B8%8E%E9%97%AD%E5%8C%85/" itemprop="url">lambda函数与闭包</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2025-04-14T10:28:06+08:00">
+                2025-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>我想生成20个小方块，编号<code>id</code>为0~19，点击后依次调用函数<code>f(id)</code>，如何简洁实现？</p>
+<h3 id="方案A"><a href="#方案A" class="headerlink" title="方案A"></a>方案A</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">    callback[i] = () =&gt; f(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不可行,最后调用的都是<code>f(20)</code>，因为每一个闭包保存的都是同一个循环变量<code>i</code>，<code>i</code>的最终值是<code>20</code>。</p>
+<h3 id="方案B"><a href="#方案B" class="headerlink" title="方案B"></a>方案B</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">int</span> capturedValue = i;</span><br><span class="line">    callback[i] = () =&gt; f(capturedValue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可行，依次调用<code>f(0)</code>~&#96;f(19)&#96;。因为capturedValue的作用域仅限单次循环内，每次循环都会重新生成，所以每个闭包保存的是不同的变量。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/13/%E6%9C%9F%E6%9C%9B%E6%82%96%E8%AE%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -350,7 +496,20 @@
 <p>假如我是其中一名玩家，我手中的金额是$x$，那么交换信封后，会等概率地发生两个随机事件中的一个：<br>事件A：x是较小的那笔钱，我获得手中金额的双倍，$2x$元，也就是获得$x$元收益；<br>事件B：x是较大的那笔钱，我获得手中金额的一半，$0.5x$元，也就是获得$-0.5x$元收益。<br>交换信封的期望收益 $E(Gain) &#x3D; 0.5(2x-x)+0.5(0.5x-x) &#x3D; 0.5x-0.25x &#x3D; 0.25x &gt; 0$<br><strong>所以选择交换对我来说更有利。</strong></p>
 </blockquote>
 <p>似乎挺有道理的，但有一个疑点：这本来是一个零和博弈，双方的总收益应该始终为0，那么双方期望收益的和也应该是0，而bub的计算结果却表明双方的期望收益都大于0。哪儿出错了？</p>
-<p><strong>这里实际上隐含了一个偷换概念的错误。</strong></p>
+<p><strong>这里实际上隐含了一个很神奇的错误</strong></p>
+<p>提问：有一个主持人会决定是否向一个箱子里放一只兔子。<br>现在你打开箱子，如果有兔子，你获得10000元奖金，如果没有兔子，你被罚10000元。<br>问你打开箱子的期望收益？</p>
+<p>提问：有一个主持人有30%的概率向一个箱子里放一只兔子，并且已经完成了她的这项随机操作。<br>现在你打开箱子，如果有兔子，你获得10000元奖金，如果没有兔子，你被罚10000元。<br>问你打开箱子的期望收益？</p>
+<p>主持人有30%的概率选择10元和5元，有70%的概率选择10元和20元。<br>关键在于你是否知情真的会影响一件事情的概率吗？<br>实际上如果信封里面是10元和5元，那么你拿到10元，它是最大面值的概率是100%。<br>可是你只知道主持人有30%的概率选择10元和5元，所以你认为概率是30%。<br>到底哪个概率是对的呢？</p>
+<p>关键在于P(你手中金额是较小金额的概率)≠P(你发现手中金额是10元，它是较小金额的概率)<br>虽然当你发现金额是10元时，理论上它既可能是较小金额也可能是较大金额，可是这个结果不管进行多少局游戏，它都是不变的。<br>这是因为游戏设定本身其实只生成了一次，在这个固定的游戏设定下，10元的身份就已经固定了，不再具有随机性。<br>在你看来具有随机性是因为你不确定，你认为哪种都有可能，你的这个估计其实是一种假设，而不会在实际统计中出现。<br>这不禁让人想，概率到底是什么。不确定的事情，概率可能是100%？？<br>你不确定不代表这个事情真的不确定。你不确定只是因为你没有掌握全部的信息。</p>
+<p>那就是直觉上，x有50%的概率是更大的面值，有50%的概率是更小的面值；<br>而实际上，手中的x是一个确定的金额，在这场游戏中，它要么是更大的面值，要么是更小的面值，并不存在随机的结果。<br>你只能说，在你没有打开信封前，你手中的金额有50%的概率是更大的面值，有50%的概率是更小的面值；<br>而在你打开信封确认了金额后，你手中的金额的概念其实从一个随机变量变成了一个确定的值x，x只可能100%是较大数或者100%是较小数，只是你无从得知。</p>
+<p>bub认为的五五开，其实已经将游戏的模型改成了这样：<br>每当你打开信封时，另一个信封的钱都有50%的概率变成你手中的一半，也有50%概率变成你手中的两倍。<br>这种模型下的期望并不符合原来的模型。</p>
+<p>正是因为<br>也就是说事件A和事件B中有一个事件的概率是0，另一个事件的概率是1，并不是五五开！<br>游戏每一局都会随机刷新信封中的钱数，而你此时拿到的钱数为x，x应该有50%的概率是较小值，有50%的概率是较大值。<br>在那些你拿到的钱数为x的局内，可能的信封组合为（x，2x）、（0.5x，x）。<br>可是实际上游戏不管进行多少局，信封组合都是固定不变的。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/46805128">https://www.zhihu.com/question/46805128</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv32725271/">https://www.bilibili.com/read/cv32725271/</a></p>
+<p>你只能在还没有打开信封之前说你手中的金额有50%的概率是更大的面值，有50%的概率是更小的面值，<br>而一旦打开信封确认了金额，你手中的金额要么100%的概率是更大的面值，要么100%的概率是更小的面值，<br>因为此时你手中的金额是大还是小已经附带了一个前提条件，那就是它的金额是x。<br>在这个条件概率分布下，金额只能是大或者小中的一种了。</p>
+<p>你认为的随机是建立在游戏本身也随机生成信封，每次游戏信封的钱都在变化的基础上的。<br>可事实是<br>举个例子，一个信封里面是5元，另一个信封里面是10元，那么不管玩多少次，5元永远是更小的那个，而不是“50%是更小的，50%是更大的”。<br>可是，从玩家的视角来看，他拥有的信息不足以看出x更倾向于是更大的面值还是更小的面值，他只能认为有50%的概率是更大的，有50%的概率是更小的。</p>
+<p>当你拿到的信封是10元时，它都是较大的那份，而不可能“50%的概率是较大的那份，50%的概率是较小的那份”。<br>这里需要区别于另一个说法：你手中的金额50%的概率是较大的那份，50%的概率是较小的那份。<br>这个说法是没问题的，因为这个说法中，“手中的金额”是一个还没有确定结果的随机变量，它可以指代不同的金额。<br>而bub的分析中，x是一个已经确定的量，那么接下来和x有关的事件实际上都是以“金额为x”作为前提条件的条件概率事件，</p>
+<p>当手中金额是较大值时，概率分布为：P(事件1)&#x3D;0%，P(事件2)&#x3D;100%；<br>当手中金额是较小值是，概率分布为：P(事件1)&#x3D;100%，P(事件2)&#x3D;0%。<br>在任何一种情况下，概率分布都不是bub所认为的等概率分布。</p>
 <p>不妨对比一下另一位同学ble给出的分析：</p>
 <blockquote>
 <p>假如我是其中一名玩家，那么那么交换信封后，会等概率地发生两个随机事件中的一个：<br>事件A：我手中是较小的那笔钱$c$，我获得手中金额的双倍，也就是$2c$元，净收益$c$元；<br>事件B：我手中是较大的那笔钱$2c$，我获得手中金额的一半，也就是$2c$元，交换后获得$c$元，净收益$-c$元。<br>所以期望收益 $E(Gain) &#x3D; 0.5c + 0.5(-c) &#x3D; 0$<br>如果交换不成功，那么显然收益为0.<br>因此不管是否交换，我的期望收益都是0，<br><strong>交不交换是无所谓的。</strong></p>
@@ -1667,183 +1826,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/17/%E6%95%B0%E5%AD%A6%E5%A6%82%E6%9E%9C%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98%EF%BC%8C%E9%82%A3%E4%B8%80%E5%AE%9A%E6%98%AF%E6%88%91%E7%9A%84%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bubble">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/beer.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's bubble">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/17/%E6%95%B0%E5%AD%A6%E5%A6%82%E6%9E%9C%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98%EF%BC%8C%E9%82%A3%E4%B8%80%E5%AE%9A%E6%98%AF%E6%88%91%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="url">如果数学出了问题，那一定是我的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-17T19:45:42+08:00">
-                2022-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bubble/" itemprop="url" rel="index">
-                    <span itemprop="name">bubble</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天下午四点左右开始困扰到刚才七点半，此过程非常痛苦，痛苦到怀疑人生。<br>因为我知道，数学不会出问题，如果出了问题，那一定是我自己的问题，我出了大问题。</p>
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>下午的计组课，本以为是和平的一堂课，但听了一耳朵之后突然意识到有些不对劲。<br>那就是补码的乘法运算。<br>在我的世界观中，原码转补码就是取模，<br>4位有符号整数的补码就是对<code>16</code>取模，32位有符号整数的补码就是对<code>4,294,967,296</code>取模。<br>在我的世界观中，我还知道一个关于取模的运算律:<code>(A*B)%M = (A%M)*(B%M) %M</code><br>所以很显然啊，<code>[A*B]补 = [A]补*[B]补 (自然溢出后)</code><br>因为比如在4位有符号整数中，<code>[X补] = X%16</code><br>所以有</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[A*B]补</span><br><span class="line">=(A*B)%16</span><br><span class="line">=(A%16)*(B%16)%16</span><br><span class="line">=[A]补*[B]补（自然溢出）</span><br></pre></td></tr></table></figure>
-
-<p>我也用程序进行了验证：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int a,b;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span><br><span class="line">    unsigned int _a = a, _b = b, _c, _d;</span><br><span class="line">    _c = _a * _b; //补码相乘</span><br><span class="line">    _d = a * b; //相乘后再转补码</span><br><span class="line">    printf(&quot;%u %u\n&quot;, _c, _d); //结果相同</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>可是如果是这么简单，为什么老师开始写满满一黑板啊？还有这个ppt是这么回事啊？怎么都在算！！！</strong><br>我开始意识到，哦，老师讲的例子都是定点小数……<br>定点小数可能和整数不太一样吧……<br>诶不对啊，定点小数不就是<strong>对2取模</strong>吗？本质上没啥区别吧？<br>整数可以的话，小数也可以吧？<br>但是从老师的讲述以及书本知识来看，<strong>小数没法直接补码相乘，至少负数和负数没法直接相乘</strong>。<br>我惊了。</p>
-<h2 id="数学天才"><a href="#数学天才" class="headerlink" title="数学天才"></a><del>数学天才</del></h2><p>书上写着，当<code>Y&lt;0</code>时，记<code>[Y]补=1.Y1Y2..Yn</code>，<br>有<code>[X*Y]补 = [X]补*0.Y1Y2..Yn + [-X]补</code><br>我想着，这么写虽然是对的，但是难道不能化简为<code>[X*Y]补 = [X]补*[Y]补</code>吗<br>于是我写出了下面这个<del>十分正确的</del>推算过程:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在模2的意义下:</span><br><span class="line">[X*Y]补</span><br><span class="line">=[X]补*0.Y1Y2..Yn + [-X]补    //书上的公式</span><br><span class="line">=[X]补*0.Y1Y2..Yn + (2-[X]补)</span><br><span class="line">=[X]补*0.Y1Y2..Yn - [X]补</span><br><span class="line">=[X]补*(0.Y1Y2..Yn - 1)</span><br><span class="line">=[X]补*(0.Y1Y2..Yn + 1)</span><br><span class="line">=[X]补*[Y]补                  //~~完全胜利~~</span><br></pre></td></tr></table></figure>
-<p>太好啦，这就说明书上的做法其实并不是唯一做法，事实上存在更简单的做法。<br>书上这么做，一定是为了方便后续的算法优化~~<br>带着胜利的心情我带入了一组样例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[X]补=1.001</span><br><span class="line">[Y]补=1.011</span><br><span class="line">[-X]补=0.111</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[X]补*[Y]补</span><br><span class="line">=1.001*1.011</span><br><span class="line">=1.001*(1+0.011)</span><br><span class="line">=1.001*0.011+1.001       //result_A</span><br><span class="line"></span><br><span class="line">[X]补*0.Y1Y2..Yn+[-X]补</span><br><span class="line">=1.001*0.011+0.111       //result_B</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>啊咧？？很显然在模2意义下<code>result_A</code>和<code>result_B</code>并不相等啊<br>可是刚才明明推出了<code>[X]补*0.Y1Y2..Yn+[-X]补 = [X]补*[Y]补</code><br>这是什么新型悖论？<br>我一直很清楚自己的运算基本功有多么糟糕，但我又花了十几分钟，得到的只是若干次的同样的结果。<br>我开始怀疑人生了。</p>
-<h2 id="察觉"><a href="#察觉" class="headerlink" title="察觉"></a>察觉</h2><p>我知道上面两个事实是矛盾的。这两个里面必定至少有一个是错的。<br>看着这本写满公式的教材，再看看实名认证的发明了<em>Booth算法</em>的Booth夫妇……<br>我知道，99.9999%的概率，我推出的那个等式是错的<br>这里面一定有什么地方是算错了。<br>我猜一定是<strong>取模</strong>。<br>经过一番挣扎，我突然发现了一个式子：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 1.001*(0.011-1)%2</span><br><span class="line">=1.001*(0.011+1)%2</span><br></pre></td></tr></table></figure>
-<p>上面这个等式显然是错的，因为上下的值相差了<code>2*1.001 = 2.002</code>，它们在<code>模2</code>的意义下相差<code>0.002</code>，并不是同余关系<br>可是如果这么写：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2*1.001 %2 = (2%2)*1.001 %2 = 0*1.001 %2 = 0</span><br></pre></td></tr></table></figure>
-<p><code>0 = 0.002</code>可不太对劲啊。<br>所以取模对小数不适用吗？？</p>
-<h2 id="重生"><a href="#重生" class="headerlink" title="重生"></a>重生</h2><p>我开始反思自己对取模的理解。<br>取模似乎是一种理所当然的东西，我都没有仔细想过它的合理性。<br>就好像苹果熟了就会掉到地上，而不会飞到天上一样。<br>来吧，<code>(A+B)%M = ( A%M + B%M )%M</code>，果真如此么？<br>果真如此。</p>
-<blockquote>
-<p>我可以想象有一个操场，一圈的长度为<code>M</code>。<br>那么<code>左边的式子</code>可以理解为<code>我从起点出发，一口气跑了(A+B)的路程，停留在哪个位置</code>。<br>而<code>右边的式子</code>可以理解为<code>我从起点出发，先跑了A的路程，然后原地休息片刻，继续跑了B的路程，最后停留在哪个位置</code>。<br>用脚指头想都知道，这两个是等价的，而且A和B可以是小数。</p>
-</blockquote>
-<p>那么接下来，<code>A*B %M = A*(B%M) %M</code>，果真如此么？</p>
-<blockquote>
-<p>左边的式子可以理解为我跑了A次，<code>每一次</code>都从上次结尾的位置出发，接着跑B的路程。<br>右边的式子可以理解为我跑了A次，<code>每一次</code>都从上次结尾的位置出发，接着跑B的路程，但是我发现B每包含完整的一圈，我就可以少跑这一圈，因为这是在做无用功。<br>也就是说在<code>每一次</code>结束的时候，<code>B</code>和<code>B%M</code>的实际效果是一样的，都会让我到达操场的同一个位置。</p>
-</blockquote>
-<p>所以当A是整数的时候，这个似乎没有任何问题。<br>但比较tricky的一点就是，<strong>当A是小数的时候，这个例子在概念上出现了根本性的区别。</strong><br>因为现在A可以取任意值，所以就没有<code>每一次</code>的概念。刚才我只会在跑完一次之后比较两种描述中我的位置是否相同，<br>可是当A可以取任意值的时候，这样的比较实际上成了一个连续的比较，也就是在每一个时间点的比较（假设规定两式中的<code>每一次</code>所耗费的时间长度相同）。<br>只要在某个时间点（对应某个A），在两种描述中我的位置不同，那就以为着存在一个A，使得这两个式子不相等。<br>这就好比体育课，<code>400m</code>的操场上有两个同学，同学甲用5分钟跑了2.5圈<code>B1=2.5*400</code>，同学乙用5分钟跑了0.5圈<code>B2=0.5*400</code>，他们跑的路程关于400是同余的<br>如果体育老师等他们出发之后就一直在终点玩手机，<strong>等他们都说跑完了再抬头看一眼</strong>，那么老师只知道这两个人都跑到同一个位置，却不知道他们跑的路程不同。<br>但如果老师<strong>一直盯着他俩看</strong>，在中途就可以发现两个人的位置并不相同，也就是A取任意数的时候，可以发现<code>A*B1%400 != A*B2%400</code>。</p>
-<p>回头看我推导的那个式子中的一步：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">模2意义下</span><br><span class="line"> [X]补*(0.Y1Y2..Yn - 1)</span><br><span class="line">=[X]补*(0.Y1Y2..Yn + 1)</span><br></pre></td></tr></table></figure>
-<p>这里[X]补并不是整数，因此这里不能用同余的性质。<br>破案了。</p>
-<p>所以小数的补码乘法确实不能简单地用补码相乘。<br>所以数学确实没有错。<br>所以再次发现自己是小丑。<br>但至少是一个安心的小丑啦~~~</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -1893,7 +1880,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1986,7 +1973,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

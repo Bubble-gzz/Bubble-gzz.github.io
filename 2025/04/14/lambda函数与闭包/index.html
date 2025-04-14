@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C#," />
 
 
 
@@ -79,12 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bubble&#39;s bubble">
-<meta property="og:url" content="http://example.com/archives/2022/index.html">
+<meta name="description" content="问题我想生成20个小方块，编号id为0~19，点击后依次调用函数f(id)，如何简洁实现？ 方案A123for (int i &#x3D; 0; i &lt; 20; i++) &amp;#123;    callback[i] &#x3D; () &#x3D;&gt; f(i);&amp;#125; 不可行,最后调用的都是f(20)，因为每一个闭包保存的都是同一个循环变量i，i的最终值是20。 方案B1234for (int i &#x3D; 0;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lambda函数与闭包">
+<meta property="og:url" content="http://example.com/2025/04/14/lambda%E5%87%BD%E6%95%B0%E4%B8%8E%E9%97%AD%E5%8C%85/index.html">
 <meta property="og:site_name" content="Bubble&#39;s bubble">
+<meta property="og:description" content="问题我想生成20个小方块，编号id为0~19，点击后依次调用函数f(id)，如何简洁实现？ 方案A123for (int i &#x3D; 0; i &lt; 20; i++) &amp;#123;    callback[i] &#x3D; () &#x3D;&gt; f(i);&amp;#125; 不可行,最后调用的都是f(20)，因为每一个闭包保存的都是同一个循环变量i，i的最终值是20。 方案B1234for (int i &#x3D; 0;">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-14T02:28:06.000Z">
+<meta property="article:modified_time" content="2025-04-14T02:36:03.622Z">
 <meta property="article:author" content="Bubble">
+<meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/archives/2022/"/>
+  <link rel="canonical" href="http://example.com/2025/04/14/lambda函数与闭包/"/>
 
 
 
 
 
-  <title>Archive | Bubble's bubble</title>
+  <title>lambda函数与闭包 | Bubble's bubble</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,411 +239,173 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/14/lambda%E5%87%BD%E6%95%B0%E4%B8%8E%E9%97%AD%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">lambda函数与闭包</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2025-04-14T10:28:06+08:00">
+                2025-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 21 posts in total. Keep on posting.
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2022">2022</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/08/10/c-sharp-%E8%AF%AD%E6%B3%95%E4%B9%8Bupcast-downcast/" itemprop="url">
-              
-                <span itemprop="name">C# 语法之upcast & downcast</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-08-10T11:07:39+08:00"
-              content="2022-08-10" >
-          08-10
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/07/11/Unity%E4%B9%8B%E8%8E%AB%E5%90%8D%E5%85%B6%E5%A6%99%E7%9A%84nullReferenceException/" itemprop="url">
-              
-                <span itemprop="name">Unity之莫名其妙的nullReferenceException</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-07-11T20:16:51+08:00"
-              content="2022-07-11" >
-          07-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/07/11/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-anchor-pivot/" itemprop="url">
-              
-                <span itemprop="name">unity基础概念:anchor & pivot</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-07-11T10:25:54+08:00"
-              content="2022-07-11" >
-          07-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>我想生成20个小方块，编号<code>id</code>为0~19，点击后依次调用函数<code>f(id)</code>，如何简洁实现？</p>
+<h3 id="方案A"><a href="#方案A" class="headerlink" title="方案A"></a>方案A</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">    callback[i] = () =&gt; f(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不可行,最后调用的都是<code>f(20)</code>，因为每一个闭包保存的都是同一个循环变量<code>i</code>，<code>i</code>的最终值是<code>20</code>。</p>
+<h3 id="方案B"><a href="#方案B" class="headerlink" title="方案B"></a>方案B</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">int</span> capturedValue = i;</span><br><span class="line">    callback[i] = () =&gt; f(capturedValue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可行，依次调用<code>f(0)</code>~&#96;f(19)&#96;。因为capturedValue的作用域仅限单次循环内，每次循环都会重新生成，所以每个闭包保存的是不同的变量。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/07/10/unity%E8%A7%A3%E6%83%91%E7%B3%BB%E5%88%97/" itemprop="url">
-              
-                <span itemprop="name">unity解惑系列</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-07-10T21:34:10+08:00"
-              content="2022-07-10" >
-          07-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/07/10/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-transform/" itemprop="url">
-              
-                <span itemprop="name">unity基础概念:transform</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-07-10T21:29:07+08:00"
-              content="2022-07-10" >
-          07-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/07/10/unity%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5-script/" itemprop="url">
-              
-                <span itemprop="name">unity基础概念:script</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-07-10T20:16:16+08:00"
-              content="2022-07-10" >
-          07-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/04/05/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%B8%8D%E5%86%8D%E6%84%9F%E5%88%B0%E5%AD%A4%E7%8B%AC/" itemprop="url">
-              
-                <span itemprop="name">为什么我不再感到孤独</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-04-05T15:27:55+08:00"
-              content="2022-04-05" >
-          04-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/03/17/%E6%95%B0%E5%AD%A6%E5%A6%82%E6%9E%9C%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98%EF%BC%8C%E9%82%A3%E4%B8%80%E5%AE%9A%E6%98%AF%E6%88%91%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="url">
-              
-                <span itemprop="name">如果数学出了问题，那一定是我的问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-03-17T19:45:42+08:00"
-              content="2022-03-17" >
-          03-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/03/17/post/" itemprop="url">
-              
-                <span itemprop="name">post</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-03-17T19:43:35+08:00"
-              content="2022-03-17" >
-          03-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/03/17/%E8%B4%9F%E6%95%B0%E7%9A%84%E5%B7%A6%E7%A7%BB%E5%8F%B3%E7%A7%BB%E5%85%B6%E5%AE%9E%E5%BE%88%E5%A5%BD%E7%90%86%E8%A7%A3/" itemprop="url">
-              
-                <span itemprop="name">负数的左移右移其实很好理解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-03-17T09:34:10+08:00"
-              content="2022-03-17" >
-          03-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/03/13/%E6%9C%9F%E6%9C%9B%E6%82%96%E8%AE%BA/" rel="next" title="期望“悖论”">
+                <i class="fa fa-chevron-left"></i> 期望“悖论”
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2022/page/2/">2</a><a class="extend next" rel="next" href="/archives/2022/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -646,6 +413,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -666,8 +437,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -765,6 +545,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88A"><span class="nav-number">2.</span> <span class="nav-text">方案A</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88B"><span class="nav-number">3.</span> <span class="nav-text">方案B</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -898,6 +694,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -955,26 +755,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
