@@ -249,6 +249,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/25/Unity%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2025/07/25/Unity%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" itemprop="url">Unity异步编程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2025-07-25T19:21:17+08:00">
+                2025-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/unity/" itemprop="url" rel="index">
+                    <span itemprop="name">unity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="代码A1"><a href="#代码A1" class="headerlink" title="代码A1"></a>代码A1</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;Playground Start&quot;</span>);</span><br><span class="line">        HeavyTask();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Playground End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">HeavyTask</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;HeavyTask Start&quot;</span>);</span><br><span class="line">        <span class="keyword">await</span> Task.Delay(<span class="number">1000</span>);</span><br><span class="line">        Debug.Log(<span class="string">&quot;HeavyTask End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">输出结果:</span></span><br><span class="line"><span class="comment">Playground Start</span></span><br><span class="line"><span class="comment">HeavyTask Start</span></span><br><span class="line"><span class="comment">Playground End</span></span><br><span class="line"><span class="comment">HeavyTask End</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码A2"><a href="#代码A2" class="headerlink" title="代码A2"></a>代码A2</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;Playground Start&quot;</span>);</span><br><span class="line">        <span class="keyword">await</span> HeavyTask();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Playground End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">HeavyTask</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;HeavyTask Start&quot;</span>);</span><br><span class="line">        <span class="keyword">await</span> Task.Delay(<span class="number">1000</span>);</span><br><span class="line">        Debug.Log(<span class="string">&quot;HeavyTask End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">输出结果:</span></span><br><span class="line"><span class="comment">Playground Start</span></span><br><span class="line"><span class="comment">HeavyTask Start</span></span><br><span class="line"><span class="comment">HeavyTask End</span></span><br><span class="line"><span class="comment">Playground End</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码B1"><a href="#代码B1" class="headerlink" title="代码B1"></a>代码B1</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> Image progressBar;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Start End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">LoadAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> n = <span class="number">100000000</span>;</span><br><span class="line">        <span class="built_in">double</span> iUnit = <span class="number">1f</span>/n;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            UniTask.Post(</span><br><span class="line">                () =&gt; progressBar.fillAmount = (<span class="built_in">float</span>)(iUnit * i)</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">        Debug.Log(<span class="string">&quot;LoadAnimation End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">运行效果：</span></span><br><span class="line"><span class="comment">LoadAnimation End</span></span><br><span class="line"><span class="comment">Start End</span></span><br><span class="line"><span class="comment">游戏画面卡住，随后进度条一下子变成100%，画面恢复流畅</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码B2"><a href="#代码B2" class="headerlink" title="代码B2"></a>代码B2</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> Image progressBar;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Start End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">LoadAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> n = <span class="number">100000000</span>;</span><br><span class="line">        <span class="built_in">double</span> iUnit = <span class="number">1f</span>/n;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            UniTask.Post(</span><br><span class="line">                () =&gt; progressBar.fillAmount = (<span class="built_in">float</span>)(iUnit * i)</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">        Debug.Log(<span class="string">&quot;LoadAnimation End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    效果和B1一样</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码C1"><a href="#代码C1" class="headerlink" title="代码C1"></a>代码C1</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> Image progressBar;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Start End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">LoadAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Task.Run(</span><br><span class="line">            () =&gt; &#123;</span><br><span class="line">                <span class="built_in">int</span> n = <span class="number">100000000</span>;</span><br><span class="line">                <span class="built_in">double</span> iUnit = <span class="number">1f</span>/n;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    UniTask.Post(</span><br><span class="line">                        () =&gt; progressBar.fillAmount = (<span class="built_in">float</span>)(iUnit * i)</span><br><span class="line">                    );</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">        Debug.Log(<span class="string">&quot;LoadAnimation End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">运行效果：</span></span><br><span class="line"><span class="comment">LoadAnimation End</span></span><br><span class="line"><span class="comment">Start End</span></span><br><span class="line"><span class="comment">游戏画面十分卡顿，但进度条能看出每次都在刷新，进度条变成100%后恢复流畅</span></span><br><span class="line"><span class="comment">卡顿原因：UniTask.Post过于频繁，导致主线程的消息队列爆炸</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码C2"><a href="#代码C2" class="headerlink" title="代码C2"></a>代码C2</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> Image progressBar;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Start End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">LoadAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> Task.Run(</span><br><span class="line">            () =&gt; &#123;</span><br><span class="line">                <span class="built_in">int</span> n = <span class="number">100000000</span>;</span><br><span class="line">                <span class="built_in">double</span> iUnit = <span class="number">1f</span>/n;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    UniTask.Post(</span><br><span class="line">                        () =&gt; progressBar.fillAmount = (<span class="built_in">float</span>)(iUnit * i)</span><br><span class="line">                    );</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">        Debug.Log(<span class="string">&quot;LoadAnimation End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">运行效果：</span></span><br><span class="line"><span class="comment">Start End</span></span><br><span class="line"><span class="comment">游戏画面十分卡顿，但进度条能看出每次都在刷新，进度条变成100%后恢复流畅</span></span><br><span class="line"><span class="comment">最后输出LoadAnimation End</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码D1"><a href="#代码D1" class="headerlink" title="代码D1"></a>代码D1</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> Image progressBar;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> PlayAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Start End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">PlayAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;PlayAnimation A End&quot;</span>);</span><br><span class="line">        <span class="keyword">await</span> LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;PlayAnimation B End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">LoadAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> Task.Run(</span><br><span class="line">            <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">                <span class="built_in">int</span> n = <span class="number">100</span>;</span><br><span class="line">                <span class="built_in">double</span> iUnit = <span class="number">1f</span>/n;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    UniTask.Post(</span><br><span class="line">                        () =&gt; progressBar.fillAmount = (<span class="built_in">float</span>)(iUnit * i)</span><br><span class="line">                    );</span><br><span class="line">                    <span class="keyword">await</span> Task.Delay(<span class="number">100</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">运行效果：</span></span><br><span class="line"><span class="comment">画面流畅，进度条缓慢增长</span></span><br><span class="line"><span class="comment">加载完第一根：PlayAnimation A End</span></span><br><span class="line"><span class="comment">加载完第二根：PlayAnimation B End</span></span><br><span class="line"><span class="comment">Start End</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码D2"><a href="#代码D2" class="headerlink" title="代码D2"></a>代码D2</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> Transform triangle;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        triangle.Rotate(<span class="number">0</span>, <span class="number">0</span>, Time.deltaTime * <span class="number">60</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Image progressBar;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> PlayAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Start End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">PlayAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;PlayAnimation A End&quot;</span>);</span><br><span class="line">        <span class="keyword">await</span> LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;PlayAnimation B End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Task <span class="title">LoadAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Task.Run(</span><br><span class="line">            <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">                <span class="built_in">int</span> n = <span class="number">100</span>;</span><br><span class="line">                <span class="built_in">double</span> iUnit = <span class="number">1f</span>/n;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    UniTask.Post(</span><br><span class="line">                        () =&gt; progressBar.fillAmount = (<span class="built_in">float</span>)(iUnit * i)</span><br><span class="line">                    );</span><br><span class="line">                    <span class="keyword">await</span> Task.Delay(<span class="number">100</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">运行效果同D1，注意对比async Task和不带async的Task</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码E"><a href="#代码E" class="headerlink" title="代码E"></a>代码E</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> Image progressBar;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> PlayAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Start End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">PlayAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;PlayAnimation A End&quot;</span>);</span><br><span class="line">        triangle.position = <span class="keyword">new</span> Vector3(<span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">await</span> LoadAnimation();</span><br><span class="line">        Debug.Log(<span class="string">&quot;PlayAnimation B End&quot;</span>);</span><br><span class="line">        triangle.position = <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">-5</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">LoadAnimation</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> n = <span class="number">1000</span>;</span><br><span class="line">        <span class="built_in">double</span> iUnit = <span class="number">1f</span>/n;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            progressBar.fillAmount = (<span class="built_in">float</span>)(iUnit * i);</span><br><span class="line">            <span class="keyword">await</span> Task.Yield();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">运行效果：</span></span><br><span class="line"><span class="comment">画面流畅，进度条流畅加载</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码F"><a href="#代码F" class="headerlink" title="代码F"></a>代码F</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> Image progressBar;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        HeavyTask();</span><br><span class="line">        Debug.Log(<span class="string">&quot;Start End&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">async</span> Task <span class="title">HeavyTask</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> Task.Delay(<span class="number">3000</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> t = <span class="number">0</span>; t &lt; <span class="number">1000</span>; t++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">int</span> n = <span class="number">10000000</span>;</span><br><span class="line">            <span class="built_in">double</span> iUnit = <span class="number">1f</span>/n;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                progressBar.fillAmount = (<span class="built_in">float</span>)(iUnit * i);</span><br><span class="line">            &#125;</span><br><span class="line">            Debug.Log(<span class="string">&quot;[&quot;</span> + Thread.CurrentThread.ManagedThreadId + <span class="string">&quot;] HeavyTask &quot;</span> + t);</span><br><span class="line">            <span class="keyword">await</span> Task.Delay(<span class="number">1000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">运行效果：</span></span><br><span class="line"><span class="comment">每过一秒钟画面就会卡一下，输出表明HeavyTask在主线程运行</span></span><br><span class="line"><span class="comment">这说明这里在await之后的代码仍然会用主线程执行</span></span><br><span class="line"><span class="comment">要想不占用，应该放到task.run里面专门用一个子线程来执行</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h2><p>1.想要一个方法能够被等待，类型设成Task</p>
+<p>2.想要一个方法能够等待别的方法，加上关键词async</p>
+<p>3.async关键字 Task类型的方法 不需要写返回值，底层会被自动处理</p>
+<p>4.async并不是直接异步，而是遇到await发现task没执行完才会挂起，其余部分代码仍然会被线程一口气同步执行完。切记不要把计算密集型任务放在主线程会执行的代码块中。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014361280/article/details/132421056">以下摘自博客</a><br>Task 看起来像一个Thread，实际上，它是在ThreadPool的基础上进行的封装，Task的控制和扩展性很强，在线程的延续、阻塞、取消、超时等方面远胜于Thread和ThreadPool。</p>
+<p>async 和 await ，await 运算符暂停对其所属的 async 方法的求值，直到其操作数表示的异步操作完成。 异步操作完成后，await 运算符将返回操作的结果（如果有）。 当 await 运算符应用到表示已完成操作的操作数时，它将立即返回操作的结果，而不会暂停其所属的方法。 await 运算符不会阻止计算异步方法的线程。 当 await 运算符暂停其所属的异步方法时，控件将返回到方法的调用方。</p>
+<p>5.await恢复继续执行后的线程和await前未必一致，而是根据有没有上下文恢复等情况决定，如果没有恢复那就可能由别的线程来执行。</p>
+<p>这一点注意，因为unity api必须在主线程调用，否则会出错。</p>
+<p>虽然unity会默认回到主线程，但还是请注意，比如有没有显示切换到别的线程还访问了unity api。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/14/lambda%E5%87%BD%E6%95%B0%E4%B8%8E%E9%97%AD%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -346,7 +506,7 @@
 <h3 id="方案A"><a href="#方案A" class="headerlink" title="方案A"></a>方案A</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">    callback[i] = () =&gt; f(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>不可行,最后调用的都是<code>f(20)</code>，因为每一个闭包保存的都是同一个循环变量<code>i</code>，<code>i</code>的最终值是<code>20</code>。</p>
 <h3 id="方案B"><a href="#方案B" class="headerlink" title="方案B"></a>方案B</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">int</span> capturedValue = i;</span><br><span class="line">    callback[i] = () =&gt; f(capturedValue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可行，依次调用<code>f(0)</code>~&#96;f(19)&#96;。因为capturedValue的作用域仅限单次循环内，每次循环都会重新生成，所以每个闭包保存的是不同的变量。</p>
+<p>可行，依次调用<code>f(0)</code> ~ <code>f(19)</code>。因为capturedValue的作用域仅限单次循环内，每次循环都会重新生成，所以每个闭包保存的是不同的变量。</p>
 
           
         
@@ -1671,161 +1831,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/05/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%B8%8D%E5%86%8D%E6%84%9F%E5%88%B0%E5%AD%A4%E7%8B%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bubble">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/beer.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's bubble">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/05/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%B8%8D%E5%86%8D%E6%84%9F%E5%88%B0%E5%AD%A4%E7%8B%AC/" itemprop="url">为什么我不再感到孤独</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-04-05T15:27:55+08:00">
-                2022-04-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bubble/" itemprop="url" rel="index">
-                    <span itemprop="name">bubble</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我觉得，孤独，源于内心世界的空虚。一个内心世界空虚的人，无法证明自己存在的意义，也没有支持自己独自活下去的能量，于是渴望向外界寻求帮助，建立亲密关系，被动地获得精神的养分。</p>
-<p>小时候的我虽然大多数时间一个人玩，但我从来不感到孤独。一个人画画，一个人看书，一个人玩玩具，那个时候我的精神世界是丰富多彩的。</p>
-<p>但自从上了中学，我就不在纸上画小游戏了，我也不玩玩具了，我的世界开始被应试教育占据。年级排名，莫名其妙的自尊，对名牌大学的迷信，来自同龄人的压力，对未来生活的忧虑……各种bullshit开始啃食我的大脑。渐渐地我的内心世界不再丰富，而是开始尝试和那些根本不适合我的东西同质化。虽然我仍然习惯独处，但我开始感到孤独。这段时间，我并不是我，而是“自以为的别人眼中的我”，是无数个通过对外界的观察习得的别的形象。我开始有一种感觉，在不同的人面前，我是不同的形象。这种感觉是不自觉的，虽然是我自己表演出来的形象，但反过来却控制了我自己的行为，让我不得不顺着这种潜意识中的自我定位去表演。</p>
-<p>到了高中，这种情况越来越严重，我很少花时间去沉浸到自己的内心世界中，或者说即使在冥想，也无从了解真正的自己。我的内心世界此刻已经一片混沌，我不知道自己想要什么，但我能感觉到强烈的空虚和恐惧。我越来越习惯于被动地接受外界的信息，对周围的人进行模仿，看到别人做什么，我总是觉得自己也应该做；总觉得别人比自己强，而自己特别废物。只有学习别人的行为，才能减轻自己的不安和恐惧。</p>
-<p>内心世界的空虚，也产生了一些奇奇怪怪的感情，爱上了一些不应该去爱的人，讨厌了一些不应该讨厌的人。这个时期爱上一个人，就像带电物体吸引轻小物体一样，内心空虚，没有主见也不够自信的我，很容易被别人外在的表面的特质吸引，从别人身上获得精神养分，产生一种廉价的仰慕。而讨厌一个人，就像一个可悲的低等生物，受到一点外界刺激就会表现出很强的攻击性，以为全世界都要威胁自己的生存，无法正确地理解和原谅。内心世界的空虚，使我在感情问题上非常被动，无法很好地控制自己。</p>
-<p>回头一看，自己原来一直在倒退啊。这么多年，我本可以变得更好，好十倍，一百倍。但我稀里糊涂地走来，甚至不如童年时期的自己。</p>
-<p>所幸在大学，我认识了一些自身非常棒的朋友，接触到了更广阔的世界，我逐渐开始重新认识自己，摒弃了一些一直坚信的东西，找到了自己归属的维度。我发现世界是多维的，如果只是在一个限定的维度上去比较，那么自然，人有高低之分。但这又什么意义呢？把一个在A维度很高大的人，投影到B维度，将ta贬低得一文不值，这有什么意义呢？或者说，一个A维度的人，本来就和B维度的夹角非常接近正交，那么ta怎么努力，在B维度的投影都几乎是在原地踏步，这不是很可悲吗？而我一直以来都是这么做的，对自己，对别人也是。我觉得世界上很多人也都是这么做的，即使不然，至少应试教育就是这么做的。</p>
-<p>这个时候，我才发现，童年时候的那种感觉回来了。我开始用自己的心去感受世界，我的内心开始安静下来，不再恐慌地追随别人的脚步。仿佛回到了那个宁静的下午，阳光照在房间的地板上，一个孩子安静地摆弄着眼前的玩具，幻想出一个奇幻的世界，他就是这个世界的上帝。仿佛回到了那个年纪，那个能够和几何，和代数，和物理，一切知识做朋友的年纪，回到了那个学习纯粹是由某种欲望驱动的年纪……</p>
-<p>我其实不期望自己通过知识来提高自己的社会地位，也不需要什么社会地位。我不是知识的奴隶，反过来，知识也不是我的奴隶。我需要用到知识的时候，我会很乐意和知识交朋友；而我不需要用到它的时候，我也希望它不要打扰我，让我身心俱疲。当我有灵感的时候，即使没有任何报酬，我也会自觉地去创造和分享新的知识；而当我没有灵感的时候，我绝对不想故作高深地去把任何东西学术化。这不就像两个人交朋友吗。双方应该保持很好的分寸感，在必要的时候给予，在不必要的时候保持距离，不要为了维持某个关系而去维持。</p>
-<p>言归正传，总之我在舍弃一些东西。舍弃一些让我觉得很累，但一度以为正确的，对人生有投资价值的东西。我天生不擅长当投机者，我很迟钝。投资这种事情，只让我感受到眼前的痛苦，我也不确定我将来能够有所收获。我只知道，我需要让自己变成什么样，而我慢慢似乎发现了答案。人生苦短，我不知道我还剩下多少个十年。所以，去他妈的投资。</p>
-<p>想想挺讽刺的。回顾这一路的成长，似乎是一次离家出走。背叛了最初的模样，获得了自以为是的成熟。直到经历，接纳，舍弃，顿悟……转了一圈，发现心中向往的那个花园，竟是最初生活的家。也许这个房子已经修葺一新，但我知道，这就是那个地方，这里有我降临到这个世界上的痕迹。无数不自觉地伪装出来的精神分裂一般的形象，全部烟消云散，只剩下那个真实的自己。听觉，视觉，味觉，嗅觉，触觉，还有，自觉，全部回来了。</p>
-<p>所以我不感到孤独了，因为我的内心能够自给自足。如果有一个对上电波的朋友，那我感激不尽，当然，随着年龄的增长，我对ta的性别，外貌的要求会越来越淡，直到ta在我的眼里，可以只是一个虚拟人。即使没有，也无所谓了。一个人再孤单，也永远可以有自己的灵魂安心地陪伴在身边。</p>
-<p>我开始发现并且确信，我想做的事情包括绘画，开发游戏，创作音乐，写文字……因为我热爱想象和表达，我喜欢和创造有关的活动。我讨厌为了一个现实而无趣的目标去努力，至少这对我来说没有什么吸引力。我对生活的要求不高，有一个自己的小屋，有吃有穿，偶尔吃顿好的，这就够了。我也没什么远大的志向去创造前沿的科技，因为人类已经创造出的文明就已经是一个巨大的宝库，足够我穷其一生去探索。正如先了解自己，再去谈其它。相比于追求未知，我还是更喜欢探索已知。我想在已经生成的世界中活出自己的痕迹。或者到了某个时候，我对已经生成的世界不满意了，我再去努力地改变它。</p>
-<p>我也不知道。确实上述文字有些偏激，但对我自己来说，我很需要自己对自己说这么一段话，管它呢。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1880,7 +1885,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1902,7 +1907,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

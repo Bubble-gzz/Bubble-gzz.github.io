@@ -87,7 +87,7 @@
 <meta property="og:description" content="问题我想生成20个小方块，编号id为0~19，点击后依次调用函数f(id)，如何简洁实现？ 方案A123for (int i &#x3D; 0; i &lt; 20; i++) &amp;#123;    callback[i] &#x3D; () &#x3D;&gt; f(i);&amp;#125; 不可行,最后调用的都是f(20)，因为每一个闭包保存的都是同一个循环变量i，i的最终值是20。 方案B1234for (int i &#x3D; 0;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-14T02:28:06.000Z">
-<meta property="article:modified_time" content="2025-04-14T02:36:03.622Z">
+<meta property="article:modified_time" content="2025-04-14T02:44:09.688Z">
 <meta property="article:author" content="Bubble">
 <meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
@@ -346,7 +346,7 @@
 <h3 id="方案A"><a href="#方案A" class="headerlink" title="方案A"></a>方案A</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">    callback[i] = () =&gt; f(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>不可行,最后调用的都是<code>f(20)</code>，因为每一个闭包保存的都是同一个循环变量<code>i</code>，<code>i</code>的最终值是<code>20</code>。</p>
 <h3 id="方案B"><a href="#方案B" class="headerlink" title="方案B"></a>方案B</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">int</span> capturedValue = i;</span><br><span class="line">    callback[i] = () =&gt; f(capturedValue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可行，依次调用<code>f(0)</code>~&#96;f(19)&#96;。因为capturedValue的作用域仅限单次循环内，每次循环都会重新生成，所以每个闭包保存的是不同的变量。</p>
+<p>可行，依次调用<code>f(0)</code> ~ <code>f(19)</code>。因为capturedValue的作用域仅限单次循环内，每次循环都会重新生成，所以每个闭包保存的是不同的变量。</p>
 
       
     </div>
@@ -386,6 +386,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2025/07/25/Unity%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" rel="prev" title="Unity异步编程">
+                Unity异步编程 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -466,7 +470,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -488,7 +492,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
