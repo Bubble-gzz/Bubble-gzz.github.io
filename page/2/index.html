@@ -249,6 +249,296 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/10/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-transform/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/10/unity%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-transform/" itemprop="url">unity基础概念:transform</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-07-10T21:29:07+08:00">
+                2022-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/unity/" itemprop="url" rel="index">
+                    <span itemprop="name">unity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>transform并不是只能用来表示坐标、大小、旋转等基本信息。<br>实际上transform的一个重要功能在于维持hierarchy。也就是结构树。<br>我觉得这是unity很反直觉的一个地方，这一点不如godot那么直观（godot中每个node在结构树中的位置就代表了它的位置，所见即所得）。<br>我一直以为有什么办法直接表示gameObject的结构树，然而unity似乎只有transform相关的结构树。<br>目前我知道的是，这个结构树似乎足够使用了（子节点继承继承父节点的transform属性，以及移动、删除）。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/10/unity%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5-script/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bubble">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/beer.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bubble's bubble">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/10/unity%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5-script/" itemprop="url">unity基础概念:script</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-07-10T20:16:16+08:00">
+                2022-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/unity/" itemprop="url" rel="index">
+                    <span itemprop="name">unity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>script是unity中的一个基本概念，即脚本，也就是写代码的地方，似乎没什么好说的。<br>但是有一些概念我还是困惑了好一阵子，所以在这边小结一下。</p>
+<h2 id="script也是component"><a href="#script也是component" class="headerlink" title="script也是component"></a>script也是component</h2><p>首先，script并没有什么特别，它和其它component一样，是依附在gameObject上的一部分。<br>script每一帧被调用实际上和其它component每一帧被计算是一个道理。</p>
+<h2 id="script本质是实例化的实现了特定接口的class"><a href="#script本质是实例化的实现了特定接口的class" class="headerlink" title="script本质是实例化的实现了特定接口的class"></a>script本质是实例化的实现了特定接口的class</h2><p>虽说script也是component，但它和其它component还是有些不同。<br><img src="/2022/07/10/unity%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5-script/picture1.png" alt="figure 1"><br>图中可以看到，其它component直接给出了类型名称，而script却是先给出类名称，然后括号里才是script。<br>我是这么理解的：一个脚本的本质是一个实例化的类，而不是一个笼统的脚本类。<br>关于实例化，这是面向对象里面的常识，我们都知道一个script在代码的class块中只是给出了定义，只有在代码中显式地进行实例化才会作为一个实体。但是在面对script的时候我却先入为主地忽略了这个机制，因为script通常依附在gameObject上，被引擎隐式地自动实例化了。而实际上，依附在gameObject上的脚本也是一个实例，它的本质实际上不是脚本类，而是对应的实例化的类。<br>一旦有了这一点认识，下面的代码也就不难理解：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Player player1 = GetComponent&lt;Player&gt;(); <span class="comment">//  并不是GetComponent&lt;script&gt;()</span></span><br><span class="line">player1.attack(); <span class="comment">// 和调用一个实例化对象的形式完全一致</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="并不是只有monobehavior"><a href="#并不是只有monobehavior" class="headerlink" title="并不是只有monobehavior"></a>并不是只有monobehavior</h2><p>上面提到，script也不过是一类特殊的实例化后的class，因此更一般的class实际上并不需要符合script的所有特点。<br>一般的class并不继承monobehavior。自然也不需要实现start、update等等method。<br>因此如果想要写一个纯数据结构，那用一般的class就行了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>有了上面这些认识，我觉得我可以清楚地意识到我写的代码究竟保存在什么地方，究竟作为什么对象，在什么环节起了作用。<br>这样我也可以更合理准确地安排我的代码结构。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/05/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%B8%8D%E5%86%8D%E6%84%9F%E5%88%B0%E5%AD%A4%E7%8B%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1695,303 +1985,6 @@ Default Parameter:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/24/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%87%E5%BF%98%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bubble">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/beer.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's bubble">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/02/24/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%87%E5%BF%98%E5%BD%95/" itemprop="url">命令行备忘录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-24T18:29:40+08:00">
-                2022-02-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tips/" itemprop="url" rel="index">
-                    <span itemprop="name">tips</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="从今天开始记录一些遇到的命令行，方便以后查"><a href="#从今天开始记录一些遇到的命令行，方便以后查" class="headerlink" title="从今天开始记录一些遇到的命令行，方便以后查"></a>从今天开始记录一些遇到的命令行，方便以后查</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a><strong>git</strong></h3><p>1.<code>git rm --cached filename</code><br>从本地缓存区移除filename这个文件<br><code>git rm --cached filename -f</code><br><strong>强制执行</strong>从本地缓存区移除filename这个文件<br>2.<code>git fetch</code><br>将远程仓库的内容拉取到本地，并且创建一个本地的分支叫origin&#x2F;master<br>3.<code>git merge branch</code><br>将branch的内容合并到当前分支，生成一个新的节点，有内容冲突会在文件中自动生成，可手动取舍<br>4.<code>git pull</code><br>pull&#x3D;fetch+merge<br>5.<code>git checkout branch</code><br>切换到branch分支，本地工作文件全部变为新的head指向的内容<br>6.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add --all</span><br><span class="line">git commit -m &quot;message&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>正常来说，将本地的更新上传到远程仓库用上面这一套命令就足够了<br>可以配置.gitignore的内容来屏蔽一些不想上传的文件</p>
-</blockquote>
-<ol start="7">
-<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin repo_address</span><br><span class="line">git branch -M main</span><br><span class="line">git add -A</span><br><span class="line">git commit -m &quot;first commitment&quot;</span><br><span class="line">git pull origin main --allow-unrelated-histories</span><br><span class="line">git push --set-upstream origin main</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>将当前工作目录初始化为一个git仓库，可以这么做<br><code>repo_address</code>指远程仓库的地址</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="conda"><a href="#conda" class="headerlink" title="conda"></a><strong>conda</strong></h3><p>1.<code>conda info</code><br>查看conda整体信息<br>2.<code>conda info --env</code>&#x2F;<code>conda info -e</code><br>查看conda当前选择的虚拟环境<br>3.<code>conda create --name envname python=x.x</code><br>创建一个名为envname的新环境，使用的python版本为x.x<br>4.<code>conda activate env</code>&#x2F;<code>conda deactivate</code><br>创建&#x2F;退出环境</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/22/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E7%9A%84%E5%B0%8F%E6%84%9F%E6%82%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bubble">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/beer.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bubble's bubble">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/02/22/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E7%9A%84%E5%B0%8F%E6%84%9F%E6%82%9F/" itemprop="url">三次握手的小感悟</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-22T17:28:12+08:00">
-                2022-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Network/" itemprop="url" rel="index">
-                    <span itemprop="name">Computer Network</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="三次握手的小感悟"><a href="#三次握手的小感悟" class="headerlink" title="三次握手的小感悟"></a>三次握手的小感悟</h3><p>核心在于，任何连接都必须建立在双方知情的基础之上，否则就会产生无法释放的死连接。<br>例如第二次握手，如果client没有收到，那么就会尝试再次发送请求，<br>如果server不经过第三次握手就建立了连接，那么第一次尝试的请求就成了client不知情的请求。<br>一旦这个连接双方都知情，那么后续处理就不需要担忧了。</p>
-<p>如果出现错误，可以通过四次挥手来终止这次连接。<br>同样四次挥手需要确保双方知情。<br>A发出结束请求，<br>B表示同意，<br>那么A就可以大胆地停止传输，等待B结束<br>B发出结束请求<br>A表示同意，<br>结束</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2046,7 +2039,7 @@ Default Parameter:
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2057,7 +2050,7 @@ Default Parameter:
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2068,7 +2061,7 @@ Default Parameter:
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2139,7 +2132,7 @@ Default Parameter:
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
